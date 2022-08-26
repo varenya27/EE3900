@@ -448,8 +448,11 @@ H(e^{\j\omega}) &= \frac{1 + e^{-2\j\omega}}{1 + \frac{1}{2}z^{-\j\omega}}
 Let the function have a periodicity $T$
 \begin{align}
     \implies H(e^{\j(\omega+T)}) &= H(e^{\j\omega})\\
-    \implies \frac{1 + e^{-2\j(\omega+T)}}{1 + \frac{1}{2}z^{-\j(\omega+T)}} &= \frac{1 + e^{-2\j\omega}}{1 + \frac{1}{2}z^{-\j\omega}}
+    \implies \frac{1 + e^{-2\j(\omega+T)}}{1 + \frac{1}{2}e^{-\j(\omega+T)}} &= \frac{1 + e^{-2\j\omega}}{1 + \frac{1}{2}e^{-\j\omega}}
+    % \implies \frac{1+cos(2(\omega+T)-\j sin(2(\omega+T)}{1+\frac{1}{2}(cos((\omega+T)-\j sin((\omega+T))}&= \frac{1+cos(2(\omega)-\j sin(2(\omega)}{1+\frac{1}{2}(cos((\omega)-\j sin((\omega))}
 \end{align}
+$e^{-2\j(\omega+T)}$ and $e^{-\j(\omega+T)}$ can both be written in terms of sines and cosines. $e^{-2\j(\omega+T)}$ will repeat for every $T=n\pi$ whereas $e^{-\j(\omega+T)}$ will repeat for all $T=2n\pi$.
+Period $T= 2\pi$
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=\columnwidth]{figures/Figure_2.png}
@@ -460,9 +463,12 @@ Let the function have a periodicity $T$
 \item Express $h(n)$ in terms of $H\brak{e^{\j \omega}}$.\\
 \solution 
 \begin{align}
-    H\brak{e^{\j \omega}}= \sum_{n=-\infty}^{\infty} h(n) e^{-n\j \omega}\\
-    H\brak{e^{\j \omega}}
-    
+    H\brak{e^{\j \omega}}&= \sum_{k=-\infty}^{\infty} h(k) e^{-k\j \omega}\\
+    \int_{-\pi}^{\pi}H\brak{e^{\j \omega}}e^{\j\omega n}d\omega&= \int_{-\pi}^{\pi}\sum_{k=-\infty}^{\infty} h(k) e^{-k\j \omega}e^{\j\omega n}d\omega\\
+    &= \sum_{k=-\infty}^{\infty}h(k)\int_{-\pi}^{\pi}e^{\brak{n-k}\j  \omega}d\omega\\
+    &=(\pi+\pi)\sum_{k=-\infty}^{\infty}h(k)\delta(n-k)\\
+    &= 2\pi h(n)\\
+    \implies h(n) &= \frac{1}{2\pi}\int_{-\pi}^{\pi}H\brak{e^{\j \omega}}e^{\j\omega n}d\omega
 \end{align}
 \end{enumerate}
 
@@ -474,7 +480,10 @@ Let the function have a periodicity $T$
 	h(n), \quad n < 5
 \end{align}
 for H(z) in \eqref{eq:freq_resp}.\\
-\solution 
+\solution Replacing $z^-1$ with $x$ in  \eqref{eq:freq_resp}:
+\begin{align}
+    
+\end{align}
 \item \label{prob:impulse_resp}
 Find an expression for $h(n)$ using $H(z)$, given that 
 %in Problem \ref{eq:ztransab} and \eqref{eq:anun}, given that
@@ -492,7 +501,7 @@ H(z) &= \frac{1}{1 + \frac{1}{2}z^{-1}} + \frac{ z^{-2}}{1 + \frac{1}{2}z^{-1}}
 \implies h(n) &= \brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2) \label{eq:hn}
 \end{align}
 using \eqref{eq:anun} and \eqref{eq:z_trans_shift}.
-\item Sketch $h(n)$. Is it bounded? Convergent? 
+\item Sketch $h(n)$. Is it bounded? Convergent? Justify using the ratio test.
 \\
 \solution The following code plots Fig. \ref{fig:hn}.
 \begin{lstlisting}

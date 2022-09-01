@@ -4,10 +4,13 @@
 \usepackage{gensymb}
 \usepackage{xcolor}
 \usepackage{caption}
+\usepackage{polynom}
 %\usepackage{subcaption}
 %\doublespacing
 \singlespacing
-
+\usepackage{scalerel}
+\usepackage{stackengine}
+\usepackage{xcolor}
 %\usepackage{graphicx}
 %\usepackage{amssymb}
 %\usepackage{relsize}
@@ -50,7 +53,7 @@
 \renewcommand\thesection{\arabic{section}}
 \renewcommand\thesubsection{\thesection.\arabic{subsection}}
 \renewcommand\thesubsubsection{\thesubsection.\arabic{subsubsection}}
-
+% \renewcommand{\j}{\j}
 \renewcommand\thesectiondis{\arabic{section}}
 \renewcommand\thesubsectiondis{\thesectiondis.\arabic{subsection}}
 \renewcommand\thesubsubsectiondis{\thesubsectiondis.\arabic{subsubsection}}
@@ -307,7 +310,7 @@ Sketch $y(n)$.
 \\
 \solution The following code yields Fig. \ref{fig:xnyn}.
 \begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/2.py
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/3_2.py
 \end{lstlisting}
 \begin{figure}[!ht]
 \begin{center}
@@ -402,7 +405,7 @@ is
 U(z) = \frac{1}{1-z^{-1}}, \quad \abs{z} > 1
 \end{equation}
 \solution It is easy to show that
-\begin{equation}
+\begin{equation}\label{eq:z_trans_constant}
 \delta(n) \ztrans 1
 \end{equation}
 \begin{align}
@@ -427,7 +430,7 @@ a^nu(n) \ztrans \frac{1}{1-az^{-1}} \quad \abs{z} > \abs{a}
 \begin{align}
     \mathcal{Z}\{a^nu(n)\} &= \sum_{n=-\infty}^{\infty} a^nu(n)z^{-n}\\
     &= \sum_{n=0}^{\infty} (az^{-1})^{n}\\
-    &= \frac{1}{1-az^{-1}}
+    &= \frac{1}{1-az^{-1}}\label{eq:z_trans_u}
 \end{align}
 \item 
 Let
@@ -435,24 +438,21 @@ Let
 H\brak{e^{\j \omega}} = H\brak{z = e^{\j \omega}}.
 \end{equation}
 Plot $\abs{H\brak{e^{\j \omega}}}$.  Is it periodic? If so, find the period. $H(e^{\j \omega})$ is
-known as the {\em Discrete Time Fourier Transform} (DTFT) of $h(n)$.
-
-\\
-\solution The following code plots Fig. \ref{fig:dtft}.
+known as the {\em Discrete Time Fourier Transform} (DTFT) of $h(n)$.\\
+\solution 
+\begin{align}
+H(e^{\j\omega}) &= \frac{1 + e^{-2\j\omega}}{1 + \frac{1}{2}z^{-\j\omega}}\\
+&= \frac{1+cos2\omega-\j sin2\omega}{1+\frac{1}{2}\brak{cos\omega-\j sin\omega}}\\
+\implies |H(e^{\j\omega})|^2&= \frac{(1+cos2\omega)^2+(sin2\omega)^2}{(1+\frac{1}{2}cos\omega)^2+\frac{1}{4}sin^2\omega}\\
+&= \frac{2+2cos2\omega}{\frac{5}{4}+cos\omega}\\
+&= \frac{16cos^2\omega}{5+4cos\omega}\\
+\implies |H(e^{\j\omega})| &= \frac{4|cos\omega|}{\sqrt{5+4cos\omega}}
+\end{align}
+$\therefore$ Period  $ T= 2\pi $
+The following code plots Fig. \ref{fig:dtft}.
 \begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/3.py
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/4_6.py
 \end{lstlisting}
-\begin{align}
-H(e^{\j\omega}) &= \frac{1 + e^{-2\j\omega}}{1 + \frac{1}{2}z^{-\j\omega}}
-\end{align}
-Let the function have a periodicity $T$
-\begin{align}
-    \implies H(e^{\j(\omega+T)}) &= H(e^{\j\omega})\\
-    \implies \frac{1 + e^{-2\j(\omega+T)}}{1 + \frac{1}{2}e^{-\j(\omega+T)}} &= \frac{1 + e^{-2\j\omega}}{1 + \frac{1}{2}e^{-\j\omega}}
-    % \implies \frac{1+cos(2(\omega+T)-\j sin(2(\omega+T)}{1+\frac{1}{2}(cos((\omega+T)-\j sin((\omega+T))}&= \frac{1+cos(2(\omega)-\j sin(2(\omega)}{1+\frac{1}{2}(cos((\omega)-\j sin((\omega))}
-\end{align}
-$e^{-2\j(\omega+T)}$ and $e^{-\j(\omega+T)}$ can both be written in terms of sines and cosines. $e^{-2\j(\omega+T)}$ will repeat for every $T=n\pi$ whereas $e^{-\j(\omega+T)}$ will repeat for all $T=2n\pi$.
-Period $T= 2\pi$
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=\columnwidth]{figures/Figure_2.png}
@@ -473,6 +473,8 @@ Period $T= 2\pi$
 \end{enumerate}
 
 
+\newcommand\showdiv[1]{\overline{\smash{\hstretch{0.5}{)}\mkern-3.2mu\hstretch{0.5}{)}}#1}}
+
 \section{Impulse Response}
 \begin{enumerate}[label=\thesection.\arabic*]
 \item Using long division, find
@@ -482,7 +484,20 @@ Period $T= 2\pi$
 for H(z) in \eqref{eq:freq_resp}.\\
 \solution Replacing $z^-1$ with $x$ in  \eqref{eq:freq_resp}:
 \begin{align}
-    
+    H(x) = \frac{1+x^2}{1+\frac{1}{2}x}
+\end{align}
+\polyset{vars=X}
+Performing long division:\\
+\begin{center}
+    \polylongdiv[vars=x]{2x^2+2}{x+2}\\
+\end{center}
+\begin{align}
+    \implies H(x) &= 2x-4 + \frac{5}{\frac{1}{2}x+1}\\
+    \implies H(z) &= 2z^{-1}-4-\frac{5}{1+\frac{1}{2}z^{-1}}
+\end{align}
+Using \eqref{eq:z_trans_constant} and \eqref{eq:z_trans_u}, applying the inverse Z transform on both sides:
+\begin{align}
+    h(n) = 2\delta(n-1)-4\delta(n)-5\brak{\frac{-1}{2}}^nu(n)
 \end{align}
 \item \label{prob:impulse_resp}
 Find an expression for $h(n)$ using $H(z)$, given that 
@@ -503,9 +518,26 @@ H(z) &= \frac{1}{1 + \frac{1}{2}z^{-1}} + \frac{ z^{-2}}{1 + \frac{1}{2}z^{-1}}
 using \eqref{eq:anun} and \eqref{eq:z_trans_shift}.
 \item Sketch $h(n)$. Is it bounded? Convergent? Justify using the ratio test.
 \\
-\solution The following code plots Fig. \ref{fig:hn}.
+\solution 
+Using \eqref{eq:hn}
+\begin{align}
+    % h(n) &= \brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2)\\
+    % h(n+1) &= \brak{-\frac{1}{2}}^{n+1}u(n+1) + \brak{-\frac{1}{2}}^{n-1}u(n-1)\\
+    \lim_{n \rightarrow{}\infty}\bigg| \frac{h(n+1)}{h(n)}\bigg|&=\bigg|\frac{\brak{-\frac{1}{2}}^{n+1}u(n+1) + \brak{-\frac{1}{2}}^{n-1}u(n-1)}{\brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2)}\bigg|\\
+    \lim_{n \rightarrow{}\infty} \bigg| \frac{h(n+1)}{h(n)}\bigg|&= \frac{\brak{\frac{1}{2}}^{n+1} + \brak{\frac{1}{2}}^{n-1}}{\brak{\frac{1}{2}}^{n} + \brak{\frac{1}{2}}^{n-2}}\\
+    &= \frac{1+2^{2}}{2+2^3}<\infty
+\end{align}
+$\therefore h(n)$ is convergent.\\
+\begin{align*}
+    |u(n)|\leq1, |u(n-2)|\leq1\\
+    \bigg|\brak{-\frac{1}{2}}^n \bigg|\leq1,\bigg|\brak{-\frac{1}{2}}^{n-2} \bigg|\leq1\\ 
+    \implies \bigg|\brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2)\bigg|&\leq2\\
+    \implies |h(n)|&\leq2
+\end{align*}
+$\therefore h(n)$ is bounded.\\
+The following code plots Fig. \ref{fig:hn}.
 \begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/4.py
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/5_3.py
 \end{lstlisting}
 \begin{figure}[!ht]
 \centering
@@ -513,7 +545,6 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/code
 \caption{$h(n)$ as the inverse of $H(z)$}
 \label{fig:hn}
 \end{figure}
-The plot is both bounded and convergent.
 
 %
 \item The system with $h(n)$ is defined to be stable if
@@ -532,6 +563,11 @@ From \eqref{eq:hn}:
     = 1.33 < \infty
 \end{align}
 The system is stable.
+\item Verify the above result using a python code.
+\solution The following python code can be used to verify the result:
+\begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/4.py
+\end{lstlisting}
 \item 
 Compute and sketch $h(n)$ using 
 \begin{equation}
@@ -545,7 +581,7 @@ This is the definition of $h(n)$.
 \ref{fig:hn}. 
 %
 \begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/5.py
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/5_6.py
 \end{lstlisting}
 \begin{figure}[!ht]
 \centering
@@ -570,7 +606,7 @@ $y(n)$ in  Fig.
 \ref{fig:xnyn}. 
 %
 \begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/5.py
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/5_7.py
 \end{lstlisting}
 \begin{figure}[!ht]
 \centering
@@ -578,7 +614,33 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/code
 \caption{$y(n)$ from the definition of convolution}
 \label{fig:ynconv}
 \end{figure}
-
+\item Express the above convolution using a Toeplitz matrix.
+\solution h(n) and x(n) can be represented as the following matrices:
+\begin{align}
+    X=\begin{pmatrix}1\\2\\3\\4\\2\\1
+    \end{pmatrix}\quad
+    H = \begin{pmatrix}1\\-0.5\\1.25\\-0.625\\0.315\\0.15625
+    \end{pmatrix}
+\end{align}
+A Toeplitz matrix can be constructed such that:
+\begin{align}
+    y &= T(h)X\\
+    T &= \begin{pmatrix}
+    1& 0 &0 &0 &0\\
+    -0.5 &1 &0 &0 &0\\
+    1.25 &-0.5 &1 &0& 0\\
+    -0.625 &1.25 &-0.5 &1& 0\\
+    0.315 &-0.625& 1.25 &-0.5& 1\\
+    0.156 & 0.315 & -0.625& 1.25 &-0.5\\
+    0 &0.156 & 0.315 & -0.625& 1.25\\
+    0&0& 0.156 & 0.315 & -0.625\\
+    0&0&0& 0.156 & 0.315\\
+    0&0&0&0& 0.156
+    \end{pmatrix}\\
+    \implies y&=\begin{pmatrix}
+    1\\1.5\\3.25\\4.38\\2.81\\3.59\\0.12\\0.78\\-0.62\\0\\-0.16
+    \end{pmatrix}
+\end{align}
 \item Show that
 \begin{equation}
 y(n) =  \sum_{n=-\infty}^{\infty}x(n-k)h(k)
@@ -593,7 +655,6 @@ Replacing $k$ with $n-k$
     &= \sum_{k=-\infty}^{\infty} x(n-k)h(k)
 \end{align}
 \end{enumerate}
-
 %
 \section{DFT and FFT}
 \begin{enumerate}[label=\thesection.\arabic*]
@@ -606,6 +667,7 @@ and $H(k)$ using $h(n)$.\\
 \solution Using eq. \eqref{def:xn},
 \begin{align}
     X(k) &= \sum _{n=0}^{N-1}x(n) e^{-\j2\pi kn/N}
+    &= 
 \end{align}
 \item Compute 
 \begin{equation}
@@ -621,11 +683,11 @@ $y(n)$ in  Fig.
 \ref{fig:xnyn}. 
 %
 \begin{lstlisting}
-wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/yndft.py
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/6_3.py
 \end{lstlisting}
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\columnwidth]{./figs/yndft}
+\includegraphics[width=\columnwidth]{figures/Figure_6.png}
 \caption{$y(n)$ from the DFT}
 \label{fig:yndft}
 \end{figure}

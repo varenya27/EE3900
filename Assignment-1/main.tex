@@ -363,6 +363,7 @@ resulting in \eqref{eq:shift1}. In the second case
     &= \sum_{n=0}^{5}x(n)z^{-n}\\
     &= 1 + 2z^{-1} + 3z^{-2} +4z^{-3} + 2z^{-4}+z^{-5}
 \end{align}	
+Since $x[n]$ is of finite duration, the ROC will be the entire z-plane except $z=0$
 	\item Find
 %
 \begin{equation}
@@ -378,6 +379,7 @@ Y(z) + \frac{1}{2}z^{-1}Y(z) &= X(z)+z^{-2}X(z)
 \implies \frac{Y(z)}{X(z)} &= \frac{1 + z^{-2}}{1 + \frac{1}{2}z^{-1}}
 \label{eq:freq_resp}
 \end{align}
+The pole of $H(z)$ is at $z=-1/2$ and its root  is at $z=i$. ROC for $H(z)$ will be $|z|>1/2$.
 %
 \item Find the Z transform of 
 \begin{equation}

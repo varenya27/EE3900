@@ -235,57 +235,29 @@ EE3900 - Assignment 1%}
 
 \bigskip
 \section{Problem}
-Consider the difference equation
+3.31 (b) Let 
 \begin{align}
-    y[n]-\frac{1}{2}y[n-1]=x[n] \label{eq:1}
+    x[n] = \begin{cases}1,& 0\leq n\leq 7\\
+    0, & 8\leq n\leq 9
+    \end{cases}
 \end{align}
-and suppose that 
+be a periodic signal with fundamental period $N=10$ and Fourier series coefficients $a_k$. Also let 
 \begin{align}
-    x[n] = \brak{\frac{1}{3}}^nu[n] \label{eq:2}
+    g[n]=x[n]-x[n-1]
 \end{align}
-Assume that the solution y[n] consists of the sum of a particular solution $y_p[n]$ to
-\eqref{eq:1} and a homogeneous solution $y_h[n]$ satisfying the equation
-\begin{align}
-    y_h[n]-\frac{1}{2}y_h[n-1]=0
-\end{align}
-
-(c) Suppose that the LTI system described by \eqref{eq:1} and initially at rest has
-as its input the signal specified by \eqref{eq:2}. Since $x[n] = 0$ for $n < 0$, we
-have that $y[n] = 0$ for $n < 0$. Also, from parts (a) and (b) we have that y[n]
-has the form
-\begin{align}
-    y[n] = A\brak{\frac{1}{2}}^n+B\brak{\frac{1}{3}}^n \label{eq:yn}
-\end{align}
-
-for $n\geq0$. In order to solve for the unknown constant A, we must specify a value
-for y[n] for some $n\geq0$. Use the condition of initial rest and \eqref{eq:1}
-and \eqref{eq:2} to determine $y[0]$. From this value determine the constant A. The
-result of this calculation yields the solution to the difference equation \eqref{eq:1}
-under the condition of initial rest, when the input is given by \eqref{eq:2}.
-
+(b) Determine the Fourier series coefficients of g[n]
 \section{Solution}
-From the condition of initial rest, we have 
+
+From part (a) we have that period of $g[n]=10$. Let $b_k$ be the Fourier series coefficients of $g[n]$
+
 \begin{align}
-    &y[n]=0, n<0\\
-    \implies &y[0]-\frac{1}{2}y[-1]=x[0]\\
-    \implies &y[0] = \brak{\frac{1}{3}}^0u[0] = 1 \label{eq:y0}
-\end{align}
-Thus, for $n\geq0$:
-\begin{align}
-    y_p[n] - \frac{1}{2}y_p[n-1] &= \brak{\frac{1}{3}}^n\\
-    y_p[n] &= B\brak{\frac{1}{3}}^n\\
-    \implies B\brak{\frac{1}{3}}^n -\frac{1}{2}B\brak{\frac{1}{3}}^{n-1} &= \brak{\frac{1}{3}}^n\\ 
-    \implies B\brak{1-\frac{3}{2}} &= 1\\
-    \implies B &= -2 \label{eq:B}
-\end{align}
-Using \eqref{eq:B} and \eqref{eq:y0} in\eqref{eq:yn}:
-\begin{align}
-    y[0] &= A+B\\
-    \implies A &= 1+2\\
-    \implies A&=3
-\end{align}
-The solution for the difference equation is thus:
-\begin{align}
-    y[n] = 3\brak{\frac{1}{2}}^nu[n]-2\brak{\frac{1}{3}}^nu[n]
+    g[n] &= \begin{cases} 1, &n=0\\
+    0, &1\leq n\leq7\\
+    -1, &n=8\\
+    0, &n=9
+    \end{cases}\\
+    b_k &= \frac{1}{10}\sum_{n=\langle10\rangle}g[n]e^{-\j k\brak{2\pi/10}n}\\
+    &= \frac{1}{10}\brak{e^{-\j k\brak{2\pi/10}\times0}-e^{-\j k\brak{2\pi/10}\times8}}\\
+    b_k &= \frac{1}{10}\brak{1-e^{-\j 8k\brak{2\pi/10}}}
 \end{align}
 \end{document}

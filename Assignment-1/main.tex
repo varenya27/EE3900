@@ -222,7 +222,7 @@ EE3900 - Assignment 1%}
 
 %\newpage
 
-\tableofcontents
+
 
 %\renewcommand{\thefigure}{\thesection.\theenumi}
 %\renewcommand{\thetable}{\thesection.\theenumi}
@@ -234,504 +234,58 @@ EE3900 - Assignment 1%}
 
 
 \bigskip
+\section{Problem}
+Consider the difference equation
+\begin{align}
+    y[n]-\frac{1}{2}y[n-1]=x[n] \label{eq:1}
+\end{align}
+and suppose that 
+\begin{align}
+    x[n] = \brak{\frac{1}{3}}^nu[n] \label{eq:2}
+\end{align}
+Assume that the solution y[n] consists of the sum of a particular solution $y_p[n]$ to
+\eqref{eq:1} and a homogeneous solution $y_h[n]$ satisfying the equation
+\begin{align}
+    y_h[n]-\frac{1}{2}y_h[n-1]=0
+\end{align}
 
-\begin{abstract}
-This manual provides a simple introduction to digital signal processing.
-\end{abstract}
-\section{Software Installation}
-Run the following commands
-\begin{lstlisting}
-sudo apt-get update
-sudo apt-get install libffi-dev libsndfile1 python3-scipy  python3-numpy python3-matplotlib 
-sudo pip install cffi pysoundfile 
-\end{lstlisting}
-\section{Digital Filter}
-\begin{enumerate}[label=\thesection.\arabic*
-,ref=\thesection.\theenumi]
-\item
-\label{prob:input}
-Download the sound file from  
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/blob/master/Assignment-1/codes/Sound_Noise.wav
-\end{lstlisting}
-%\href{http://tlc.iith.ac.in/img/sound/Sound_Noise.wav}{\url{http://tlc.iith.ac.in/img/sound/Sound_Noise.wav}}  
-%in the link given below.
-%\linebreak
-\item
-\label{prob:spectrogram}
-You will find a spectrogram at \href{https://academo.org/demos/spectrum-analyzer}{\url{https://academo.org/demos/spectrum-analyzer}}. 
-%\end{problem}
-%%
-%
-%%\onecolumn
-%%\input{./figs/fir}
-%\begin{problem}
-Upload the sound file that you downloaded in Problem \ref{prob:input} in the spectrogram  and play.  Observe the spectrogram. What do you find?
-\\
-%
-\solution There are a lot of yellow lines between 440 Hz to 5.1 KHz.  These represent the synthesizer key tones. Also, the key strokes
-are audible along with background noise.
-% By observing spectrogram, it clearly shows that tonal frequency is under 4kHz. And above 4kHz only noise is present.
-\item
-\label{prob:output}
-Write the python code for removal of out of band noise and execute the code.
-\\
-\solution
-\lstinputlisting[language=Python]{codes/1.py}
-% \begin{figure}[h]
-% \centering
-% \includegraphics[width=\columnwidth]{enc_block_diag.png}
-% \caption{}
-% \label{fig:convolution encoder}
-% \end{figure}
-% \input{block_enc}
-\item
-The output of the python script in Problem \ref{prob:output} is the audio file Sound\_With\_ReducedNoise.wav. Play the file in the spectrogram in Problem \ref{prob:spectrogram}. What do you observe?
-\\
-\solution The key strokes as well as background noise is subdued in the audio.  Also,  the signal is blank for frequencies above 5.1 kHz.
+(c) Suppose that the LTI system described by \eqref{eq:1} and initially at rest has
+as its input the signal specified by \eqref{eq:2}. Since $x[n] = 0$ for $n < 0$, we
+have that $y[n] = 0$ for $n < 0$. Also, from parts (a) and (b) we have that y[n]
+has the form
+\begin{align}
+    y[n] = A\brak{\frac{1}{2}}^n+B\brak{\frac{1}{3}}^n \label{eq:yn}
+\end{align}
 
-\end{enumerate}
-\section{Difference Equation}
-\begin{enumerate}[label=\thesection.\arabic*,ref=\thesection.\theenumi]
-\item Let \label{def:xn}
-\begin{equation}
-x(n) = \cbrak{\underset{\uparrow}{1},2,3,4,2,1}\label{eq:xn}
-\end{equation}
-Sketch $x(n)$.\\
-\solution Fig. \ref{fig:xnyn} contains the plot for $x(n)$
-\item Let
-\begin{multline}
-\label{eq:iir_filter}
-y(n) + \frac{1}{2}y(n-1) = x(n) + x(n-2), 
-\\
- y(n) = 0, n < 0
-\end{multline}
-Sketch $y(n)$.
-\\
-\solution The following code yields Fig. \ref{fig:xnyn}.
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/3_2.py
-\end{lstlisting}
-\begin{figure}[!ht]
-\begin{center}
-\includegraphics[width=\columnwidth]{figures/Figure_1.png}
-\end{center}
-\captionof{figure}{}
-\label{fig:xnyn}	
-\end{figure}
-\item Repeat the above exercise using a C code.\\
-\solution
-\lstinputlisting[language=C]{codes/2.c}
+for $n\geq0$. In order to solve for the unknown constant A, we must specify a value
+for y[n] for some $n\geq0$. Use the condition of initial rest and \eqref{eq:1}
+and \eqref{eq:2} to determine $y[0]$. From this value determine the constant A. The
+result of this calculation yields the solution to the difference equation \eqref{eq:1}
+under the condition of initial rest, when the input is given by \eqref{eq:2}.
 
-\end{enumerate}
-\section{$Z$-transform}
-\begin{enumerate}[label=\thesection.\arabic*]
-\item The $Z$-transform of $x(n)$ is defined as
-%
-\begin{equation}
-\label{eq:z_trans}
-X(z)={\mathcal {Z}}\{x(n)\}=\sum _{n=-\infty }^{\infty }x(n)z^{-n}
-\end{equation}
-%
-Show that
-\begin{equation}
-\label{eq:shift1}
-{\mathcal {Z}}\{x(n-1)\} = z^{-1}X(z)
-\end{equation}
-and find
-\begin{equation}
-	{\mathcal {Z}}\{x(n-k)\} 
-\end{equation}
-\solution From \eqref{eq:z_trans},
+\section{Solution}
+From the condition of initial rest, we have 
 \begin{align}
-{\mathcal {Z}}\{x(n-1)\} &=\sum _{n=-\infty }^{\infty }x(n-1)z^{-n}
-\\
-&=\sum _{n=-\infty }^{\infty }x(n)z^{-n-1} \\&= z^{-1}\sum _{n=-\infty }^{\infty }x(n)z^{-n}
+    &y[n]=0, n<0\\
+    \implies &y[0]-\frac{1}{2}y[-1]=x[0]\\
+    \implies &y[0] = \brak{\frac{1}{3}}^0u[0] = 1 \label{eq:y0}
 \end{align}
-resulting in \eqref{eq:shift1}. In the second case
-%
+Thus, for $n\geq0$:
 \begin{align}
-\label{eq:z_trans_shift}
-\mathcal {Z}\{x(n-k)\} &=\sum _{n=-\infty }^{\infty }x(n-k)z^{-n}\\
-&= \sum _{n=-\infty }^{\infty }x(n)z^{-n-k}\\
-&= z^{-k}\sum_{n=-\infty}^{\infty}x(n)z^{-n}
+    y_p[n] - \frac{1}{2}y_p[n-1] &= \brak{\frac{1}{3}}^n\\
+    y_p[n] &= B\brak{\frac{1}{3}}^n\\
+    \implies B\brak{\frac{1}{3}}^n -\frac{1}{2}B\brak{\frac{1}{3}}^{n-1} &= \brak{\frac{1}{3}}^n\\ 
+    \implies B\brak{1-\frac{3}{2}} &= 1\\
+    \implies B &= -2 \label{eq:B}
 \end{align}
-\item Obtain $X(z)$ for $x(n)$ defined in problem 
-	\ref{def:xn}.\\
-\solution \begin{align}
-    X(z) &= \sum_{n=-\infty}^{\infty}x(n)z^{-n}\\
-    &= \sum_{n=0}^{5}x(n)z^{-n}\\
-    &= 1 + 2z^{-1} + 3z^{-2} +4z^{-3} + 2z^{-4}+z^{-5}
-\end{align}	
-Since $x[n]$ is of finite duration, the ROC will be the entire z-plane except $z=0$
-	\item Find
-%
-\begin{equation}
-H(z) = \frac{Y(z)}{X(z)}
-\end{equation}
-%
-from  \eqref{eq:iir_filter} assuming that the $Z$-transform is a linear operation.
-\\
-\solution  Applying \eqref{eq:z_trans_shift} in \eqref{eq:iir_filter},
+Using \eqref{eq:B} and \eqref{eq:y0} in\eqref{eq:yn}:
 \begin{align}
-Y(z) + \frac{1}{2}z^{-1}Y(z) &= X(z)+z^{-2}X(z)
-\\
-\implies \frac{Y(z)}{X(z)} &= \frac{1 + z^{-2}}{1 + \frac{1}{2}z^{-1}}
-\label{eq:freq_resp}
+    y[0] &= A+B\\
+    \implies A &= 1+2\\
+    \implies A&=3
 \end{align}
-The pole of $H(z)$ is at $z=-1/2$ and its root  is at $z=i$. ROC for $H(z)$ will be $|z|>1/2$.
-%
-\item Find the Z transform of 
-\begin{equation}
-\delta(n)
-=
-\begin{cases}
-1 & n = 0
-\\
-0 & \text{otherwise}
-\end{cases}
-\end{equation}
-and show that the $Z$-transform of
-\begin{equation}
-\label{eq:unit_step}
-u(n)
-=
-\begin{cases}
-1 & n \ge 0
-\\
-0 & \text{otherwise}
-\end{cases}
-\end{equation}
-is
-\begin{equation}
-U(z) = \frac{1}{1-z^{-1}}, \quad \abs{z} > 1
-\end{equation}
-\solution It is easy to show that
-\begin{equation}\label{eq:z_trans_constant}
-\delta(n) \ztrans 1
-\end{equation}
+The solution for the difference equation is thus:
 \begin{align}
-    \mathcal {Z}\{\delta(n)\} &=\sum _{n=-\infty }^{\infty }\delta(n)z^{-n}\\
-    &= \delta(0)z^0\\
-    &=1
+    y[n] = 3\brak{\frac{1}{2}}^nu[n]-2\brak{\frac{1}{3}}^nu[n]
 \end{align}
-and from \eqref{eq:unit_step},
-\begin{align}
-U(z) &= \sum _{n= 0}^{\infty}z^{-n}
-\\
-&=\frac{1}{1-z^{-1}}, \quad \abs{z} > 1
-\end{align}
-using the formula for the sum of an infinite geometric progression.
-%
-\item Show that 
-\begin{equation}
-\label{eq:anun}
-a^nu(n) \ztrans \frac{1}{1-az^{-1}} \quad \abs{z} > \abs{a}
-\end{equation}
-\solution
-\begin{align}
-    \mathcal{Z}\{a^nu(n)\} &= \sum_{n=-\infty}^{\infty} a^nu(n)z^{-n}\\
-    &= \sum_{n=0}^{\infty} (az^{-1})^{n}\\
-    &= \frac{1}{1-az^{-1}}\label{eq:z_trans_u}
-\end{align}
-\item 
-Let
-\begin{equation}
-H\brak{e^{\j \omega}} = H\brak{z = e^{\j \omega}}.
-\end{equation}
-Plot $\abs{H\brak{e^{\j \omega}}}$.  Is it periodic? If so, find the period. $H(e^{\j \omega})$ is
-known as the {\em Discrete Time Fourier Transform} (DTFT) of $h(n)$.\\
-\solution 
-\begin{align}
-H(e^{\j\omega}) &= \frac{1 + e^{-2\j\omega}}{1 + \frac{1}{2}z^{-\j\omega}}\\
-&= \frac{1+cos2\omega-\j sin2\omega}{1+\frac{1}{2}\brak{cos\omega-\j sin\omega}}\\
-\implies |H(e^{\j\omega})|^2&= \frac{(1+cos2\omega)^2+(sin2\omega)^2}{(1+\frac{1}{2}cos\omega)^2+\frac{1}{4}sin^2\omega}\\
-&= \frac{2+2cos2\omega}{\frac{5}{4}+cos\omega}\\
-&= \frac{16cos^2\omega}{5+4cos\omega}\\
-\implies |H(e^{\j\omega})| &= \frac{4|cos\omega|}{\sqrt{5+4cos\omega}}
-\end{align}
-$\therefore$ Period  $ T= 2\pi $
-The following code plots Fig. \ref{fig:dtft}.
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/4_6.py
-\end{lstlisting}
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=\columnwidth]{figures/Figure_2.png}
-\caption{$\abs{H\brak{e^{\j\omega}}}$}
-\label{fig:dtft}
-\end{figure}
-\\
-\item Express $h(n)$ in terms of $H\brak{e^{\j \omega}}$.\\
-\solution 
-\begin{align}
-    H\brak{e^{\j \omega}}&= \sum_{k=-\infty}^{\infty} h(k) e^{-k\j \omega}\\
-    \int_{-\pi}^{\pi}H\brak{e^{\j \omega}}e^{\j\omega n}d\omega&= \int_{-\pi}^{\pi}\sum_{k=-\infty}^{\infty} h(k) e^{-k\j \omega}e^{\j\omega n}d\omega\\
-    &= \sum_{k=-\infty}^{\infty}h(k)\int_{-\pi}^{\pi}e^{\brak{n-k}\j  \omega}d\omega\\
-    &=(\pi+\pi)\sum_{k=-\infty}^{\infty}h(k)\delta(n-k)\\
-    &= 2\pi h(n)\\
-    \implies h(n) &= \frac{1}{2\pi}\int_{-\pi}^{\pi}H\brak{e^{\j \omega}}e^{\j\omega n}d\omega
-\end{align}
-\end{enumerate}
-
-
-\newcommand\showdiv[1]{\overline{\smash{\hstretch{0.5}{)}\mkern-3.2mu\hstretch{0.5}{)}}#1}}
-
-\section{Impulse Response}
-\begin{enumerate}[label=\thesection.\arabic*]
-\item Using long division, find
-\begin{align}
-	h(n), \quad n < 5
-\end{align}
-for H(z) in \eqref{eq:freq_resp}.\\
-\solution Replacing $z^-1$ with $x$ in  \eqref{eq:freq_resp}:
-\begin{align}
-    H(x) = \frac{1+x^2}{1+\frac{1}{2}x}
-\end{align}
-\polyset{vars=X}
-Performing long division:\\
-\begin{center}
-    \polylongdiv[vars=x]{2x^2+2}{x+2}\\
-\end{center}
-\begin{align}
-    \implies H(x) &= 2x-4 + \frac{5}{\frac{1}{2}x+1}\\
-    \implies H(z) &= 2z^{-1}-4-\frac{5}{1+\frac{1}{2}z^{-1}}
-\end{align}
-Using \eqref{eq:z_trans_constant} and \eqref{eq:z_trans_u}, applying the inverse Z transform on both sides:
-\begin{align}
-    h(n) = 2\delta(n-1)-4\delta(n)-5\brak{\frac{-1}{2}}^nu(n)
-\end{align}
-\item \label{prob:impulse_resp}
-Find an expression for $h(n)$ using $H(z)$, given that 
-%in Problem \ref{eq:ztransab} and \eqref{eq:anun}, given that
-\begin{equation}
-\label{eq:impulse_resp}
-h(n) \ztrans H(z)
-\end{equation}
-and there is a one to one relationship between $h(n)$ and $H(z)$. $h(n)$ is known as the {\em impulse response} of the
-system defined by \eqref{eq:iir_filter}.
-\\
-\solution From \eqref{eq:freq_resp},
-\begin{align}
-H(z) &= \frac{1}{1 + \frac{1}{2}z^{-1}} + \frac{ z^{-2}}{1 + \frac{1}{2}z^{-1}}
-\\
-\implies h(n) &= \brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2) \label{eq:hn}
-\end{align}
-using \eqref{eq:anun} and \eqref{eq:z_trans_shift}.
-\item Sketch $h(n)$. Is it bounded? Convergent? Justify using the ratio test.
-\\
-\solution 
-Using \eqref{eq:hn}
-\begin{align}
-    % h(n) &= \brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2)\\
-    % h(n+1) &= \brak{-\frac{1}{2}}^{n+1}u(n+1) + \brak{-\frac{1}{2}}^{n-1}u(n-1)\\
-    \lim_{n \rightarrow{}\infty}\bigg| \frac{h(n+1)}{h(n)}\bigg|&=\bigg|\frac{\brak{-\frac{1}{2}}^{n+1}u(n+1) + \brak{-\frac{1}{2}}^{n-1}u(n-1)}{\brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2)}\bigg|\\
-    \lim_{n \rightarrow{}\infty} \bigg| \frac{h(n+1)}{h(n)}\bigg|&= \frac{\brak{\frac{1}{2}}^{n+1} + \brak{\frac{1}{2}}^{n-1}}{\brak{\frac{1}{2}}^{n} + \brak{\frac{1}{2}}^{n-2}}\\
-    &= \frac{1+2^{2}}{2+2^3}<\infty
-\end{align}
-$\therefore h(n)$ is convergent.\\
-\begin{align*}
-    |u(n)|\leq1, |u(n-2)|\leq1\\
-    \bigg|\brak{-\frac{1}{2}}^n \bigg|\leq1,\bigg|\brak{-\frac{1}{2}}^{n-2} \bigg|\leq1\\ 
-    \implies \bigg|\brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2)\bigg|&\leq2\\
-    \implies |h(n)|&\leq2
-\end{align*}
-$\therefore h(n)$ is bounded.\\
-The following code plots Fig. \ref{fig:hn}.
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/5_3.py
-\end{lstlisting}
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=\columnwidth]{figures/Figure_3.png}
-\caption{$h(n)$ as the inverse of $H(z)$}
-\label{fig:hn}
-\end{figure}
-
-%
-\item The system with $h(n)$ is defined to be stable if
-\begin{equation}
-\sum_{n=-\infty}^{\infty}h(n) < \infty
-\end{equation}
-Is the system defined by \eqref{eq:iir_filter} stable for the impulse response in \eqref{eq:impulse_resp}?
-%
-\\\solution
-From \eqref{eq:hn}:
-\begin{align}
-    \sum_{n=-\infty}^{\infty} h(n) &= \sum_{n=-\infty}^{\infty}\brak{-\frac{1}{2}}^{n}u(n) + \brak{-\frac{1}{2}}^{n-2}u(n-2)\\
-    &= \sum_{n=0}^{\infty}\brak{-\frac{1}{2}}^{n} + \sum_{n=2}^{\infty}\brak{-\frac{1}{2}}^{n-2}\\
-    &= 2\sum_{n=0}^{\infty}\brak{-\frac{1}{2}}^{n}\\
-    &= 2\times\frac{1}{1+1/2}
-    = 1.33 < \infty
-\end{align}
-The system is stable.
-\item Verify the above result using a python code.
-\solution The following python code can be used to verify the result:
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/4.py
-\end{lstlisting}
-\item 
-Compute and sketch $h(n)$ using 
-\begin{equation}
-\label{eq:iir_filter_h}
-h(n) + \frac{1}{2}h(n-1) = \delta(n) + \delta(n-2), 
-\end{equation}
-%
-This is the definition of $h(n)$.
-\\
-\solution The following code plots Fig. \ref{fig:hndef}. Note that this is the same as Fig. 
-\ref{fig:hn}. 
-%
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/5_6.py
-\end{lstlisting}
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=\columnwidth]{figures/Figure_4.png}
-\caption{$h(n)$ from the definition}
-\label{fig:hndef}
-\end{figure}
-%
-\item Compute 
-%
-\begin{equation}
-\label{eq:convolution}
-y(n) = x(n)*h(n) = \sum_{k=-\infty}^{\infty}x(k)h(n-k)
-\end{equation}
-%
-Comment. The operation in \eqref{eq:convolution} is known as
-{\em convolution}.
-%
-\\
-\solution The following code plots Fig. \ref{fig:ynconv}. Note that this is the same as 
-$y(n)$ in  Fig. 
-\ref{fig:xnyn}. 
-%
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/5_7.py
-\end{lstlisting}
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=\columnwidth]{figures/Figure_5.png}
-\caption{$y(n)$ from the definition of convolution}
-\label{fig:ynconv}
-\end{figure}
-\item Express the above convolution using a Toeplitz matrix.
-\solution h(n) and x(n) can be represented as the following matrices:
-\begin{align}
-    X=\begin{pmatrix}1\\2\\3\\4\\2\\1
-    \end{pmatrix}\quad
-    H = \begin{pmatrix}1\\-0.5\\1.25\\-0.625\\0.315\\0.15625
-    \end{pmatrix}
-\end{align}
-A Toeplitz matrix can be constructed such that:
-\begin{align}
-    y &= T(h)X\\
-    T &= \begin{pmatrix}
-    1& 0 &0 &0 &0\\
-    -0.5 &1 &0 &0 &0\\
-    1.25 &-0.5 &1 &0& 0\\
-    -0.625 &1.25 &-0.5 &1& 0\\
-    0.315 &-0.625& 1.25 &-0.5& 1\\
-    0.156 & 0.315 & -0.625& 1.25 &-0.5\\
-    0 &0.156 & 0.315 & -0.625& 1.25\\
-    0&0& 0.156 & 0.315 & -0.625\\
-    0&0&0& 0.156 & 0.315\\
-    0&0&0&0& 0.156
-    \end{pmatrix}\\
-    \implies y&=\begin{pmatrix}
-    1\\1.5\\3.25\\4.38\\2.81\\3.59\\0.12\\0.78\\-0.62\\0\\-0.16
-    \end{pmatrix}
-\end{align}
-\item Show that
-\begin{equation}
-y(n) =  \sum_{n=-\infty}^{\infty}x(n-k)h(k)
-\end{equation}\\
-\solution From the convolution operation in \eqref{eq:convolution}, 
-\begin{align}
-    y(n) &= \sum_{k=-\infty}^{\infty}x(k)h(n-k)
-\end{align}
-Replacing $k$ with $n-k$
-\begin{align}
-    &= \sum_{n-k=-\infty}^{\infty} x(n-k)h(k)\\
-    &= \sum_{k=-\infty}^{\infty} x(n-k)h(k)
-\end{align}
-\end{enumerate}
-%
-\section{DFT and FFT}
-\begin{enumerate}[label=\thesection.\arabic*]
-\item
-Compute
-\begin{equation}
-X(k) \define \sum _{n=0}^{N-1}x(n) e^{-\j2\pi kn/N}, \quad k = 0,1,\dots, N-1
-\end{equation}
-and $H(k)$ using $h(n)$.\\
-\solution Using eq. \eqref{def:xn},
-\begin{align}
-    X(k) &= \sum _{n=0}^{N-1}x(n) e^{-\j2\pi kn/N}
-    &= 
-\end{align}
-\item Compute 
-\begin{equation}
-Y(k) = X(k)H(k)
-\end{equation}
-\item Compute
-\begin{equation}
- y\brak{n}={\frac {1}{N}}\sum _{k=0}^{N-1}Y\brak{k}\cdot e^{\j 2\pi kn/N},\quad n = 0,1,\dots, N-1
-\end{equation}
-\\
-\solution The following code plots Fig. \ref{fig:ynconv}. Note that this is the same as 
-$y(n)$ in  Fig. 
-\ref{fig:xnyn}. 
-%
-\begin{lstlisting}
-wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/6_3.py
-\end{lstlisting}
-\begin{figure}[!ht]
-\centering
-\includegraphics[width=\columnwidth]{figures/Figure_6.png}
-\caption{$y(n)$ from the DFT}
-\label{fig:yndft}
-\end{figure}
-
-\item Repeat the previous exercise by computing $X(k), H(k)$ and $y(n)$ through FFT and 
-IFFT.
-\item Wherever possible, express all the above equations as matrix equations.
-\end{enumerate}
-%
-\section{Exercises}
-
-Answer the following questions by looking at the python code in Problem \ref{prob:output}.
-\begin{enumerate}[label=\thesection.\arabic*]
-\item
-The command
-\begin{lstlisting}
-	output_signal = signal.lfilter(b, a, input_signal)
-	\end{lstlisting}
-in Problem \ref{prob:output} is executed through the following difference equation
-\begin{equation}
-\label{eq:iir_filter_gen}
- \sum _{m=0}^{M}a\brak{m}y\brak{n-m}=\sum _{k=0}^{N}b\brak{k}x\brak{n-k}
-\end{equation}
-%
-where the input signal is $x(n)$ and the output signal is $y(n)$ with initial values all 0. Replace
-\textbf{signal.filtfilt} with your own routine and verify.
-%
-\item Repeat all the exercises in the previous sections for the above $a$ and $b$.
-
-\item What is the sampling frequency of the input signal?
-\\
-\solution
-Sampling frequency(fs)=44.1kHZ.
-\item
-What is type, order and  cutoff-frequency of the above butterworth filter
-\\
-\solution
-The given butterworth filter is low pass with order=2 and cutoff-frequency=4kHz.
-%
-\item
-Modifying the code with different input parameters and to get the best possible output.
-%
-\end{enumerate}
-
 \end{document}

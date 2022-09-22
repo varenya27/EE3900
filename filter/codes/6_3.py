@@ -40,4 +40,4 @@ plt.grid()# minor
 #
 
 
-plt.savefig('figures/Figure_6.png')
+plt.savefig('filter/figures/Figure_6.png')

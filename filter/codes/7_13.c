@@ -9,8 +9,12 @@ complex *fft(int N, complex *x) {
     complex *X1 = (complex *)malloc(N/2*sizeof(complex));
     complex *X2 = (complex *)malloc(N/2*sizeof(complex));
     for(int i=0;i<N;i++){
-        if(i%2==0) X1[i/2]=x[i];
-        else X2[i/2]=x[i];
+        if(i%2==0){
+             X1[i/2]=x[i];
+        }
+        else {
+            X2[i/2]=x[i];
+        }
     }
 
     X1= fft(N/2,X1);
@@ -20,8 +24,8 @@ complex *fft(int N, complex *x) {
     for(int i=0;i<N;i++){
         if(i==N/2) k=0;
         // printf("%d %d\n",i,k);
-        // x[i]=X1[k]+cexp(-I*2*M_PI*i/N)*X2[k];
-        x[i]=X1[i%(N/2)]+cexp(-I*2*pi*i/N)*X2[i%(N/2)];
+        x[i]=X1[k]+cexp(-I*2*pi*i/N)*X2[k];
+        // x[i]=X1[i%(N/2)]+cexp(-I*2*pi*i/N)*X2[i%(N/2)];
         k++;
     }
     free(X1);

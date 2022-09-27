@@ -1,33 +1,51 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include <math.h>
-#include <stdlib.h>
 #include <complex.h>
-#include <time.h>
-#define EPS 1e-6
+#include <stdlib.h>
 #define pi 3.14159
 
-complex *myfft(int n, complex *a) {
-	if (n == 1) return a;
-	complex *g = (complex *)malloc(n/2*sizeof(complex));
-	complex *h = (complex *)malloc(n/2*sizeof(complex));
-	for (int i = 0; i < n; i++) { 
-		if (i%2) h[i/2] = a[i];
-		else g[i/2] = a[i];
-	}
-	g = myfft(n/2, g);
-	h = myfft(n/2, h);
-	for (int i = 0; i < n; i++) a[i] = g[i%(n/2)] + cexp(-I*2*pi*i/n)*h[i%(n/2)];
-	free(g); free(h);
-	return a;
+complex *fft(int N, complex *x) {
+    if(N==1) return x;
+    complex *X1 = (complex *)malloc(N/2*sizeof(complex));
+    complex *X2 = (complex *)malloc(N/2*sizeof(complex));
+    for(int i=0;i<N;i++){
+        if(i%2==0) X1[i/2]=x[i];
+        else X2[i/2]=x[i];
+    }
+
+    X1= fft(N/2,X1);
+    X2= fft(N/2,X2);
+
+    int k=0;
+    for(int i=0;i<N;i++){
+        if(i==N/2) k=0;
+        // printf("%d %d\n",i,k);
+        // x[i]=X1[k]+cexp(-I*2*M_PI*i/N)*X2[k];
+        x[i]=X1[i%(N/2)]+cexp(-I*2*pi*i/N)*X2[i%(N/2)];
+        k++;
+    }
+    free(X1);
+    free(X2);
+    return x;
 }
 
 int main() { 
-	int n = 8;
-	complex *a = (complex *)malloc(sizeof(complex)*n);
-	a[0] = 1.0, a[1] = 2.0, a[2] = 3.0, a[3] = 4.0, a[4] = 2.0, a[5] = 1.0, a[6] = 0.0, a[7] = 0.0;
-	a = myfft(n, a);
-	for (int i = 0; i < n; i++) printf("X(%d) = %lf + %lfj\n", i, creal(a[i]), cimag(a[i]));
-	free(a);
+    int N=8;
+    complex* x = (complex*)malloc(N*sizeof(complex));
+    x[0]=1.;
+    x[1]=2.;
+    x[2]=3.;
+    x[3]=4.;
+    x[4]=2.;
+    x[5]=1.;
+    x[6]=0.;
+    x[7]=0.;
+    complex* X = (complex*)malloc(N*sizeof(complex));
+    X=fft(N,x);
+    for(int i=0;i<N;i++){
+        printf("X(%d) = %.2f + j(%.2f)\n",i,creal(X[i]),cimag(X[i]));
+    }
 	return 0;
+
+
 }

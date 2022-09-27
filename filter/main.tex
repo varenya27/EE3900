@@ -693,7 +693,7 @@ $y(n)$ in  Fig.
 \ref{fig:xnyn}. 
 %
 \begin{lstlisting}
-wget https://raw.githubusercontent.com/gadepall/EE1310/master/filter/codes/yndft.py
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/filter/codes/6_3.py
 \end{lstlisting}
 \begin{figure}[!ht]
 \centering
@@ -713,7 +713,13 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/code
 \caption{$y(n)$ from FFT}
 \label{fig:ynfft}
 \end{figure}
-
+The following code plots Figure \ref{fig:ynall} which contains the plots of $y(n)$ from the three definitions (difference equation, DFT, FFT)
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/Figure_all.png}
+    \caption{y(n) from different definitions}
+    \label{fig:ynall}
+\end{figure}
 %\item Wherever possible, express all the above equations as matrix equations.
 %\item Verify the above equations by generating the DFT matrix in python.
 \end{enumerate}
@@ -745,12 +751,18 @@ W_{N} = e^{-j2\pi/N}
 	\end{align}
 \item The 4 point {\em DFT diagonal matrix} is defined as 
 	\begin{align}
-		\vec{D}_4 = diag\myvec{W_{8}^{0} & W_{8}^{1} & W_{8}^{2} & W_{8}^{3}}
+		\vec{D}_4 = \text{diag}\myvec{W_{8}^{0} & W_{8}^{1} & W_{8}^{2} & W_{8}^{3}}
 	\end{align}
 \item Show that 
 \begin{equation}
     W_{N}^{2}=W_{N/2}
-\end{equation}
+\end{equation}\\
+\solution \begin{align}
+    W_N &= e^{-\j2\pi/N}\\
+    \implies W_N^2 &= e^{-\j4\pi/N}\\
+    &= e^{-\j2\pi/(N/2)}\\
+    &= W_{N/2}
+\end{align}
 %    \item Find $\vec{P}_6$.
 %    \item Find $\vec{D}_3$.
     \item Show that 
@@ -765,7 +777,74 @@ W_{N} = e^{-j2\pi/N}
 0 & \vec{F}_{2}
 \end{bmatrix}
 \vec{P}_{4}
-\end{equation}
+\end{equation}\\
+\solution Since $P_4$ is a permutation matrix, $P_4P_4=I$\begin{align}
+\vec{D_2}\vec{F_2} &= \begin{bmatrix}
+W_4^0&0\\
+0&W_4
+\end{bmatrix}\begin{bmatrix}
+1&1\\
+1&W_2
+\end{bmatrix}\\
+&= \begin{bmatrix}
+1&1\\
+W_4&W_4W_2
+\end{bmatrix}=\begin{bmatrix}
+1&1\\
+W_4&W_4^3
+\end{bmatrix}\\
+    \begin{bmatrix}
+	\vec{I}_{2} & \vec{D}_{2} \\
+\vec{I}_{2} & -\vec{D}_{2}
+\end{bmatrix}
+&\begin{bmatrix}
+\vec{F}_{2} & 0 \\
+0 & \vec{F}_{2}
+\end{bmatrix}=
+\begin{bmatrix}
+\vec{F}_{2} & \vec{D}_{2}\vec{F}_{2} \\
+\vec{F}_{2} & -\vec{D}_{2}\vec{F}_{2}
+\end{bmatrix}\\
+&=\begin{bmatrix}
+W_2^0 & W_2^0&1&1\\
+W_2^0 & W_2&W_4& W_4^3\\
+W_2^0 & W_2^0 & -1&-1 \\
+W_2^0 & W_2 & -W_4& -W_4^3
+\end{bmatrix} 
+\\&=\begin{bmatrix}
+1 & 1&1&1\\
+1 & W_4^2&W_4& W_4^3\\
+1 & 1 & W_4^2&W_4^2 \\
+1 & W_4^2 & W_4^3& W_4^5
+\end{bmatrix} 
+\end{align}
+we know that 
+\begin{align}
+    \vec{P}_4=[\vec{e_1}\vec{e_2}\vec{e_3}\vec{e_4}]
+\end{align}
+Which implies that a $\vec{P_4}$ would swap the second and third rows.
+\begin{align}
+    \begin{bmatrix}
+	\vec{I}_{2} & \vec{D}_{2} \\
+\vec{I}_{2} & -\vec{D}_{2}
+\end{bmatrix}
+\begin{bmatrix}
+\vec{F}_{2} & 0 \\
+0 & \vec{F}_{2}
+\end{bmatrix}
+\vec{P}_{4}=\begin{bmatrix}
+1 & 1&1&1\\
+1 & W_4&W_4^2& W_4^3\\
+1 & W_4^2 & 1&W_4^2 \\
+1 & W_4^3 & W_4^2& W_4^5
+\end{bmatrix}\\
+= \begin{bmatrix}
+1 & 1&1&1\\
+1 & W_4&W_4^2& W_4^3\\
+1 & W_4^2 & W_4^4&W_4^6 \\
+1 & W_4^3 & W_4^6& W_4^9
+\end{bmatrix}=\vec{F_4}
+\end{align}
 \item Show that 
 \begin{equation}
 \vec{F}_{N}=
@@ -778,17 +857,57 @@ W_{N} = e^{-j2\pi/N}
 0 & \vec{F}_{N/2}
 \end{bmatrix}
 \vec{P}_{N}
-\end{equation}
+\end{equation}\\
+\solution Let $\vec{F_N}=[\vec{f_N^1}\vec{f_N^2}\cdots\vec{f_N^N}]$
+,for even N:\begin{align}
+    &\begin{bmatrix}
+    I_{N/2}F_{N/2}\\
+    I_{N/2}F_{N/2}
+    \end{bmatrix}=[\vec{f_N^1}\vec{f_N^3}\cdots\vec{f_N^{N-1}}]\\
+        &\begin{bmatrix}
+    D_{N/2}F_{N/2}\\
+    -D_{N/2}F_{N/2}
+    \end{bmatrix}=[\vec{f_N^2}\vec{f_N^4}\cdots\vec{f_N^{N}}]\\
+    &\implies \begin{bmatrix}
+    I_{N/2}F_{N/2}& D_{N/2}F_{N/2}\\
+    I_{N/2}F_{N/2}&-D_{N/2}F_{N/2}
+    \end{bmatrix}=[\vec{f_N^1}\vec{f_N^3}\cdots\vec{f_N^{N-1}}\vec{f_N^2}\vec{f_N^4}\cdots\vec{f_N^{N}}]\\
+&\implies \begin{bmatrix}
+\vec{I}_{N/2} & \vec{D}_{N/2} \\
+\vec{I}_{N/2} & -\vec{D}_{N/2}
+\end{bmatrix}
+\begin{bmatrix}
+\vec{F}_{N/2} & 0 \\
+0 & \vec{F}_{N/2}
+\end{bmatrix}
+\vec{P}_{N}=[\vec{f_N^1}\vec{f_N^2}\cdots\vec{f_N^N}]\\
+&= \vec{F_N}
+\end{align}
 \item Find 
     \begin{align}
 	     \vec{P}_4 \vec{x}
+    \end{align}\\
+    \solution
+    \begin{align}
+        \vec{x}=\begin{pmatrix}
+        x_0\\x_1\\x_2\\x_3
+        \end{pmatrix}&, \vec{P_4}=\begin{pmatrix}\vec{e_1}&\vec{e_3}&\vec{e_2}&\vec{e_4}\end{pmatrix}\\
+        \vec{P_4}\vec{x}&=x_0\vec{e_1}+x_2\vec{e_2}+x_1\vec{e_3}+x_3\vec{e_4}\\
+        &=\begin{pmatrix}
+        x_0\\x_2\\x_1\\x_3
+        \end{pmatrix}
     \end{align}
 \item Show that 
     \begin{align}
 	    \vec{X} = \vec{F}_N \vec{x}
 	    \label{eq:dft-mat-def}
     \end{align}
-		where $\vec{x}, \vec{X}$ are the vector representations of $x(n), X(k)$ respectively.
+		where $\vec{x}, \vec{X}$ are the vector representations of $x(n), X(k)$ respectively.\\
+		\solution \begin{align}
+		    \vec{F_N}\vec{x}(k) &= \sum_{i=0}^{N-1}F(ki)x(i)\\
+		    &=  \sum_{i=0}^{N-1}W_N^{ki}x(i)\\
+		    &=  \sum_{i=0}^{N-1}e^{\j2\pi ki/N}x(i) = X(k)
+		\end{align}
 \item Derive the following Step-by-step visualisation  of
 8-point FFTs into 4-point FFTs and so on
 \begin{equation}
@@ -1029,18 +1148,151 @@ x(3) \\
 x(7) \\ 
 \end{bmatrix}
 \end{equation}
-\item For 
-    \begin{align}
-	    \vec{x} = \myvec{1\\2\\3\\4\\2\\1}
-        \label{eq:equation1}
+\solution
+\begin{align}
+    X(k) &= \sum_{n=0}^{7}x(n)e^{\j2\pi kn/8}\\
+    &= \sum_{n=0}^{3}x(2n)e^{\j4\pi kn/8}+\sum_{n=0}^{3}x(2n+1)e^{\j2\pi k(2n+1)/8}\\
+    &= \sum_{n=0}^{3}x(2n)e^{\j4\pi kn/8}+e^{\j\pi k/4}x(2n+1)e^{\j2\pi k(2n)/8}\\
+    &= X_1(k) + e^{\j\pi k/4}X_2(k)
+\end{align}
+Where $X_1, X_2$ are the 4-point FFTs for the even and odd terms respectively. For the first four terms in X ie. $k=\{0,1,2,3\}$:
+\begin{align}
+    \begin{pmatrix}
+    X(0)\\X(1)\\X(2)\\X(3)
+    \end{pmatrix}&=
+    \begin{pmatrix}
+    X_1(0)\\X_1(1)\\X_1(2)\\X_1(3)
+    \end{pmatrix} +
+    \begin{pmatrix}
+    e^{2\pi\j0/8}X_2(0)\\e^{2\pi\j1/8}X_2(1)\\e^{2\pi\j2/8}X_2(2)\\e^{2\pi\j3/8}X_2(3)
+    \end{pmatrix}\\
+    &=\begin{pmatrix}
+    X_1(0)\\X_1(1)\\X_1(2)\\X_1(3)
+    \end{pmatrix} +
+    \begin{pmatrix}
+    W_8^0&0&0&0\\
+    0&W_8&0&0\\
+    0&0&W_8^2&0\\
+    0&0&0&W_8^3
+    \end{pmatrix}
+    \begin{pmatrix}
+    X_2(0)\\X_2(1)\\X_2(2)\\X_2(3)
+    \end{pmatrix}
+\end{align}
+Similarly for $k=\{4,5,6,7\}$:
+\begin{align}
+        \begin{pmatrix}
+    X(4)\\X(5)\\X(6)\\X(7)
+    \end{pmatrix}&=
+    \begin{pmatrix}
+    X_1(4)\\X_1(5)\\X_1(6)\\X_1(7)
+    \end{pmatrix} +
+    \begin{pmatrix}
+    e^{2\pi\j4/8}X_2(4)\\e^{2\pi\j5/8}X_2(5)\\e^{2\pi\j6/8}X_2(6)\\e^{2\pi\j7/8}X_2(7)
+    \end{pmatrix}
     \end{align}
-    compte the DFT  
+    Using $X_1(k)=X_1(k-4)$ and $e^{2\pi\j k/8}=-e^{2\pi\j(k-4)/8}$ for $k=\{4,5,6,7\}$
+    \begin{align}
+    \begin{pmatrix}
+    X(4)\\X(5)\\X(6)\\X(7)
+    \end{pmatrix}&=\begin{pmatrix}
+    X_1(0)\\X_1(1)\\X_1(2)\\X_1(3)
+    \end{pmatrix} +\nonumber
+    \\&\begin{pmatrix}
+    -W_8^0&0&0&0\\
+    0&-W_8&0&0\\
+    0&0&-W_8^2&0\\
+    0&0&0&-W_8^3
+    \end{pmatrix}
+    \begin{pmatrix}
+    X_2(0)\\X_2(1)\\X_2(2)\\X_2(3)
+    \end{pmatrix}
+\end{align}
+Similarly to convert the 4-point FFTs into 2-point FFTs, we can split them based on the even/odd indices. Let $x_1(n) \text{ and } x_2(n)$ represent $x(2n) \text{ and } x(2n+1)$ resp.
+\begin{align}
+    X_1(k) &= \sum_{n=0}^{n=3}x_1(n)e^{\j2\pi nk/4}\\
+    &=\sum_{n=0}^{n=1}x_1(2n)e^{\j2\pi 2nk/4}+x_1(2n+1)e^{\j2\pi (2n+1)k/4}\\
+    &= \sum_{n=0}^{n=1}x_1(2n)e^{\j2\pi nk/2}+e^{\j2\pi k/4}x_1(2n+1)e^{\j2\pi nk/2}\\
+    &= X_3(k)+e^{\j2\pi k/4}X_4(k)
+\end{align}
+where $X_3$ and $X_4$ are now 2-point FFTs of the even and odd indexed terms in $X_1$. The above equation in matrix form can be written as follows for $k=\{0,1\}$:
+\begin{align}
+\begin{pmatrix}
+X_1(0)\\X_1(1)
+\end{pmatrix}&=\begin{pmatrix}
+X_3(0)\\X_3(1)
+\end{pmatrix}+\begin{pmatrix}
+e^{\j2\pi 0/4}X_4(0)\\
+e^{\j2\pi 1/4}X_4(1)
+\end{pmatrix}\\
+&= \begin{pmatrix}
+X_3(0)\\X_3(1)
+\end{pmatrix}+\begin{pmatrix}
+W_4^0&0\\0&W_4^1
+\end{pmatrix}\begin{pmatrix}
+X_4(0)\\
+X_4(1)
+\end{pmatrix}\label{eq:fft1}
+\end{align}
+Similarly for $k=\{2,3\}$ using the fact that $X_3(k)=X_3(k-2)$ and $X_4(k)=X_4(k-2)$
+\begin{align}
+   \begin{pmatrix}
+X_1(2)\\X_1(3)
+\end{pmatrix} &= \begin{pmatrix}
+X_3(0)\\X_3(1)
+\end{pmatrix}+\begin{pmatrix}
+-W_4^0&0\\0&-W_4^1
+\end{pmatrix}\begin{pmatrix}
+X_4(0)\\
+X_4(1)
+\end{pmatrix}\label{eq:fft2}
+\end{align}
+Following the same procedure and introducing $X_5,X_6$ as 2-point FFTs for the even and odd indexed terms in $X_2$:
+\begin{align}
+       \begin{pmatrix}
+X_2(1)\\X_2(0)
+\end{pmatrix} &= \begin{pmatrix}
+X_5(0)\\X_5(1)
+\end{pmatrix}+\begin{pmatrix}
+W_4^0&0\\0&W_4^1
+\end{pmatrix}\begin{pmatrix}
+X_6(0)\\
+X_6(1)
+\end{pmatrix}\label{eq:fft3}\\
+   \begin{pmatrix}
+X_2(2)\\X_2(3)
+\end{pmatrix} &= \begin{pmatrix}
+X_5(0)\\X_5(1)
+\end{pmatrix}+\begin{pmatrix}
+-W_4^0&0\\0&-W_4^1
+\end{pmatrix}\begin{pmatrix}
+X_6(0)\\
+X_6(1)
+\end{pmatrix}\label{eq:fft4}
+\end{align}
+\eqref{eq:fft1},\eqref{eq:fft2},\eqref{eq:fft3},\eqref{eq:fft4} are the four equations that represent the 2-point FFTs of $X_1$ and $X_2$.
+\item For 
+    \begin{align}\label{eq:equation1}
+	    \vec{x} = \begin{pmatrix}{1\\2\\3\\4\\2\\1}\end{pmatrix}%
+    \end{align}
+    compute the DFT  
 		using 
-	    \eqref{eq:dft-mat-def}
+	    \eqref{eq:dft-mat-def}\\
+	    \solution The following code computes the DFT using matrix multiplication:
+	    \begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/7_11.py
+\end{lstlisting}
     \item Repeat the above exercise using the FFT
 	    after zero padding $\vec{x}$.
-%	    \eqref{eq:fft-mat-def}
-\item Write a C program to compute the 8-point FFT. 
+	    	    \\\solution The following code computes the DFT using matrix multiplication:
+	    \begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/7_12.py
+\end{lstlisting}
+\item Write a C program to compute the 8-point FFT. \\
+\solution The following code computes the FFT using recursion:
+	    \begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/Assignment-1/codes/7_13.c
+\end{lstlisting}
  \end{enumerate}
 \section{Exercises}
 Answer the following questions by looking at the python code in Problem \ref{prob:output}.

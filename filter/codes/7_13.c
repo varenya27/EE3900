@@ -23,9 +23,8 @@ complex *fft(int N, complex *x) {
     int k=0;
     for(int i=0;i<N;i++){
         if(i==N/2) k=0;
-        // printf("%d %d\n",i,k);
         x[i]=X1[k]+cexp(-I*2*pi*i/N)*X2[k];
-        // x[i]=X1[i%(N/2)]+cexp(-I*2*pi*i/N)*X2[i%(N/2)];
+		
         k++;
     }
     free(X1);

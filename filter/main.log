@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.8.11)  12 SEP 2022 09:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.8.11)  28 SEP 2022 11:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1202,36 +1202,582 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 LaTeX Warning: Command \j invalid in math mode on input line 666.
 
 
-LaTeX Warning: Command \j invalid in math mode on input line 673.
+Underfull \hbox (badness 10000) in paragraph at lines 667--680
+
+ []
 
 
-LaTeX Warning: Command \j invalid in math mode on input line 673.
+LaTeX Warning: Command \j invalid in math mode on input line 688.
 
 
-LaTeX Warning: Command \j invalid in math mode on input line 680.
+Underfull \hbox (badness 6741) in paragraph at lines 689--695
+\OT1/txr/bx/n/12 Solution: \OT1/txr/m/n/12 The fol-low-ing code com-putes
+ []
 
-<figures/Figure_6.png, id=312, 462.528pt x 346.896pt>
-File: figures/Figure_6.png Graphic file (type png)
-<use figures/Figure_6.png>
-Package pdftex.def Info: figures/Figure_6.png  used on input line 692.
+<./figures/Figure_6.png, id=311, 462.528pt x 346.896pt>
+File: ./figures/Figure_6.png Graphic file (type png)
+<use ./figures/Figure_6.png>
+Package pdftex.def Info: ./figures/Figure_6.png  used on input line 700.
 (pdftex.def)             Requested size: 252.0pt x 189.00427pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 737.
-[7 <./figures/Figure_6.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 737.
+
+LaTeX Warning: Reference `fig:ynfft' on page 7 undefined on input line 706.
+
+<figures/Figure_7.png, id=312, 462.528pt x 346.896pt>
+File: figures/Figure_7.png Graphic file (type png)
+<use figures/Figure_7.png>
+Package pdftex.def Info: figures/Figure_7.png  used on input line 712.
+(pdftex.def)             Requested size: 252.0pt x 189.00427pt.
+
+LaTeX Warning: Reference `fig:ynall' on page 7 undefined on input line 716.
+
+<figures/Figure_all.png, id=313, 462.528pt x 346.896pt>
+File: figures/Figure_all.png Graphic file (type png)
+<use figures/Figure_all.png>
+Package pdftex.def Info: figures/Figure_all.png  used on input line 719.
+(pdftex.def)             Requested size: 252.0pt x 189.00427pt.
+[7 <./figures/Figure_6.png> <./figures/Figure_7.png> <./figures/Figure_all.png>
+]
+! Undefined control sequence.
+<argument>  \vec {I}_4 = \myvec 
+                                {\vec {e}_4^{1} &\vec {e}_4^{2} &\vec {e}_4^...
+l.747 	\end{align}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.747 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.747 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Undefined control sequence.
+<argument>  \vec {I}_4 = \myvec 
+                                {\vec {e}_4^{1} &\vec {e}_4^{2} &\vec {e}_4^...
+l.747 	\end{align}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.747 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.747 	\end{align}
+                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Misplaced \omit.
+\math@cr@@@ ...@ \@ne \add@amps \maxfields@ \omit 
+                                                  \kern -\alignsep@ \iftag@ ...
+l.747 	\end{align}
+                  
+I expect to see \omit only after tab marks or the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.747 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Undefined control sequence.
+<argument>  \vec {P}_4 = \myvec 
+                                {\vec {e}_4^{1} &\vec {e}_4^{3} &\vec {e}_4^...
+l.751 	\end{align}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.751 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.751 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Undefined control sequence.
+<argument>  \vec {P}_4 = \myvec 
+                                {\vec {e}_4^{1} &\vec {e}_4^{3} &\vec {e}_4^...
+l.751 	\end{align}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.751 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.751 	\end{align}
+                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Misplaced \omit.
+\math@cr@@@ ...@ \@ne \add@amps \maxfields@ \omit 
+                                                  \kern -\alignsep@ \iftag@ ...
+l.751 	\end{align}
+                  
+I expect to see \omit only after tab marks or the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.751 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Undefined control sequence.
+<argument>  \vec {D}_4 = \text {diag}\myvec 
+                                            {W_{8}^{0} & W_{8}^{1} & W_{8}^{...
+l.755 	\end{align}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.755 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.755 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Undefined control sequence.
+<argument>  \vec {D}_4 = \text {diag}\myvec 
+                                            {W_{8}^{0} & W_{8}^{1} & W_{8}^{...
+l.755 	\end{align}
+                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.755 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+! Missing \endgroup inserted.
+<inserted text> 
+                \endgroup 
+l.755 	\end{align}
+                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Misplaced \omit.
+\math@cr@@@ ...@ \@ne \add@amps \maxfields@ \omit 
+                                                  \kern -\alignsep@ \iftag@ ...
+l.755 	\end{align}
+                  
+I expect to see \omit only after tab marks or the \cr of
+an alignment. Proceed, and I'll ignore this case.
+
+! Missing { inserted.
+<inserted text> 
+                {
+l.755 	\end{align}
+                  
+I've put in what seems to be necessary to fix
+the current column of the current alignment.
+Try to go on, since this might almost work.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 765.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 765.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 765.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 765.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 765.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 765.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (52.40863pt too wide) detected at line 885
+[]
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [8]
+
+LaTeX Warning: Command \j invalid in math mode on input line 910.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 910.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9]
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1157.
+
+
+Overfull \hbox (8.91293pt too wide) detected at line 1157
+[]
+ []
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1181.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1181.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1181.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1181.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1181.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1181.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1181.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1181.
+
+
+Overfull \hbox (4.67561pt too wide) detected at line 1181
+[]
+ []
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1193.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1193.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1193.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1193.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1193.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1193.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1193.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1193.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1194.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1194.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1217.
+
+
+Overfull \hbox (12.981pt too wide) detected at line 1217
+[]
+ []
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1236.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1236.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1236.
+
+
+LaTeX Warning: Command \j invalid in math mode on input line 1236.
+
+
+LaTeX Warning: Reference `eq:fft1' on page 10 undefined on input line 1273.
+
+
+LaTeX Warning: Reference `eq:fft2' on page 10 undefined on input line 1273.
+
+
+LaTeX Warning: Reference `eq:fft3' on page 10 undefined on input line 1273.
+
+
+LaTeX Warning: Reference `eq:fft4' on page 10 undefined on input line 1273.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.1277     \end{align}
+                      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten $.
+<argument> ...= \begin {pmatrix}{1\\2\\3\\4\\2\\1}
+                                                  \end {pmatrix}
+l.1277     \end{align}
+                      
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.1277     \end{align}
+                      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Extra }, or forgotten $.
+<argument> ...= \begin {pmatrix}{1\\2\\3\\4\\2\\1}
+                                                  \end {pmatrix}
+l.1277     \end{align}
+                      
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+LaTeX Warning: Reference `eq:dft-mat-def' on page 10 undefined on input line 12
+80.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1329.
+
+[11
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1329.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 737.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 737.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 2154E13812F1013637C6C87519C101FD;346.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1329.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1329.
+
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 2154E13812F1013637C6C87519C101FD;346
+(rerunfilecheck)             After:  2DDA8394A1BAD0AD4E57C5AE6675DC33;377.
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 14202 strings out of 483183
- 210543 string characters out of 5966292
+ 14328 strings out of 483183
+ 212146 string characters out of 5966292
  756218 words of memory out of 5000000
- 28708 multiletter control sequences out of 15000+600000
+ 28740 multiletter control sequences out of 15000+600000
  593691 words of font info for 146 fonts, out of 8000000 for 9000
  17 hyphenation exceptions out of 8191
- 41i,14n,53p,822b,1791s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,15n,53p,822b,1791s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/txfonts/rtxb.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/txfonts/rtxi.pfb></usr/share/texlive/texmf-dist/fonts/type1
@@ -1243,10 +1789,10 @@ exmf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/
 times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (7 pages, 213516 bytes).
+Output written on main.pdf (11 pages, 259779 bytes).
 PDF statistics:
- 433 PDF objects out of 1000 (max. 8388607)
- 396 compressed objects within 4 object streams
- 221 named destinations out of 1000 (max. 500000)
- 87 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 558 PDF objects out of 1000 (max. 8388607)
+ 511 compressed objects within 6 object streams
+ 312 named destinations out of 1000 (max. 500000)
+ 97 words of extra memory for PDF output out of 10000 (max. 10000000)
 

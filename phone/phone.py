@@ -7,5 +7,5 @@ print(x)
 plt.figure()
 plt.plot(x,x**2)
 plt.grid()
-plt.savefig("phone_plit.png")
+plt.savefig("phone_plot.png")
 

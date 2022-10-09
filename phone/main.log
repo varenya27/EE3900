@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Termux) (preloaded format=pdflatex 2022.10.4)  8 OCT 2022 21:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Termux) (preloaded format=pdflatex 2022.10.4)  4 OCT 2022 14:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**main.tex
+**ex8t
 (./main.tex
 LaTeX2e <2022-06-01> patch level 5
 L3 programming layer <2022-09-28>
@@ -679,15 +679,7 @@ Type  H <return>  for immediate help.
                                                   
 l.46 
      
-The package amsmath has already been loaded with options:
-  []
-There has now been an attempt to load it with options
-  [cmex10]
-Adding the global options:
-  ,cmex10
-to your \documentclass declaration may fix this.
-Try typing  <return>  to proceed.
-
+? 
 
 (/data/data/com.termux/files/usr/share/texlive/texmf-dist/tex/latex/listings/ls
 tlang1.sty
@@ -705,7 +697,8 @@ File: ot1txr.fd 2000/12/15 v3.1
 File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count321
 \l__pdf_internal_box=\box64
-) (./main.aux)
+)
+No file main.aux.
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 74.
@@ -853,7 +846,6 @@ Package graphics Info: Driver file: pdftex.def on input line 107.
 \Gin@req@width=\dimen263
 )
 Package hyperref Info: Link coloring OFF on input line 74.
- (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
@@ -865,7 +857,8 @@ Package hyperref Info: Link coloring OFF on input line 74.
 \c@example=\count333
 \c@definition=\count334
 \c@rem=\count335
- (./main.toc)
+
+No file main.toc.
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
@@ -913,12 +906,30 @@ Overfull \hbox (25.86975pt too wide) detected at line 254
 []
  []
 
-<figures/2_2.png, id=20, 462.528pt x 346.896pt>
-File: figures/2_2.png Graphic file (type png)
-<use figures/2_2.png>
-Package pdftex.def Info: figures/2_2.png  used on input line 262.
-(pdftex.def)             Requested size: 252.0pt x 189.00427pt.
 
+LaTeX Warning: Reference `fig:xn' on page 1 undefined on input line 256.
+
+
+LaTeX Warning: File `figures/2_2.png' not found on input line 262.
+
+
+! Package pdftex.def Error: File `figures/2_2.png' not found: using draft setti
+ng.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.262 ...hics[width=\columnwidth]{figures/2_2.png}
+                                                  
+? 
+LaTeX Font Info:    Trying to load font information for OT1+txtt on input line 
+262.
+
+(/data/data/com.termux/files/usr/share/texlive/texmf-dist/tex/latex/txfonts/ot1
+txtt.fd
+File: ot1txtt.fd 2000/12/15 v3.1
+)
 Overfull \hbox (13.5206pt too wide) detected at line 275
 []
  []
@@ -930,16 +941,28 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 dmap/pdftex.map}
 
 
- <./figures/2_2.png>]
+]
 Overfull \hbox (2.36862pt too wide) detected at line 288
 []
  []
 
-<figures/2_5.png, id=60, 462.528pt x 346.896pt>
-File: figures/2_5.png Graphic file (type png)
-<use figures/2_5.png>
-Package pdftex.def Info: figures/2_5.png  used on input line 300.
-(pdftex.def)             Requested size: 252.0pt x 189.00427pt.
+
+LaTeX Warning: Reference `fig:yn' on page 2 undefined on input line 294.
+
+
+LaTeX Warning: File `figures/2_5.png' not found on input line 300.
+
+
+! Package pdftex.def Error: File `figures/2_5.png' not found: using draft setti
+ng.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.300 ...hics[width=\columnwidth]{figures/2_5.png}
+                                                  
+? 
 
 Underfull \vbox (badness 5302) has occurred while \output is active []
 
@@ -951,7 +974,11 @@ Overfull \hbox (9.68985pt too wide) detected at line 324
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [2 <./figures/2_5.png>]
+ [2]
+
+LaTeX Warning: Reference `eq:xn' on page 3 undefined on input line 335.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -970,33 +997,59 @@ Type  H <return>  for immediate help.
                                                   
 l.412 \begin{enumerate}[a]
                           
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+? 
+
+LaTeX Warning: Reference `eq:ak' on page 4 undefined on input line 413.
+
+
+LaTeX Warning: Reference `eq:akztr' on page 4 undefined on input line 426.
+
+
+LaTeX Warning: Reference `eq:az10' on page 4 undefined on input line 432.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4]
+
+LaTeX Warning: Reference `eq:10-orig-diff' on page 5 undefined on input line 43
+8.
+
+
+LaTeX Warning: Reference `eq:xn' on page 5 undefined on input line 438.
+
+
+LaTeX Warning: Reference `eq:yn' on page 5 undefined on input line 438.
+
+
+LaTeX Warning: Reference `eq:bz10' on page 5 undefined on input line 445.
+
 [5
 
 ] (./main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 
 Package rerunfilecheck Warning: File `main.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 84E0C472418CCA051F909B1CF9289940;151
+(rerunfilecheck)             Before: <no file>
 (rerunfilecheck)             After:  6EF0FDA02AE42AB5EB9699AF63378C50;377.
  ) 
 Here is how much of TeX's memory you used:
- 16701 strings out of 475071
- 267871 string characters out of 5767931
- 841021 words of memory out of 5000000
- 37734 multiletter control sequences out of 15000+600000
- 529951 words of font info for 148 fonts, out of 8000000 for 9000
+ 16778 strings out of 475071
+ 269518 string characters out of 5767931
+ 840021 words of memory out of 5000000
+ 37801 multiletter control sequences out of 15000+600000
+ 530227 words of font info for 149 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 72i,10n,77p,258b,1241s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,10n,77p,254b,1239s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/data/data/com.termux/files/usr/share/texlive/texmf-dist/fonts/enc/dvips/bas
 e/8r.enc}</data/data/com.termux/files/usr/share/texlive/texmf-dist/fonts/type1/
 public/txfonts/rtxmi.pfb></data/data/com.termux/files/usr/share/texlive/texmf-d
@@ -1007,15 +1060,16 @@ ata/com.termux/files/usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/tx
 sy.pfb></data/data/com.termux/files/usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/txfonts/txsyb.pfb></data/data/com.termux/files/usr/share/texlive/texmf-dis
 t/fonts/type1/public/txfonts/txsyc.pfb></data/data/com.termux/files/usr/share/t
-exlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></data/data/com.termux/files
-/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></data/data/com
-.termux/files/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></d
-ata/data/com.termux/files/usr/share/texlive/texmf-dist/fonts/type1/urw/times/ut
-mri8a.pfb>
-Output written on main.pdf (5 pages, 111188 bytes).
+exlive/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></data/data/com.termux/fi
+les/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></data/data/c
+om.termux/files/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb>
+</data/data/com.termux/files/usr/share/texlive/texmf-dist/fonts/type1/urw/times
+/utmr8a.pfb></data/data/com.termux/files/usr/share/texlive/texmf-dist/fonts/typ
+e1/urw/times/utmri8a.pfb>
+Output written on main.pdf (5 pages, 87010 bytes).
 PDF statistics:
- 263 PDF objects out of 1000 (max. 8388607)
- 227 compressed objects within 3 object streams
+ 240 PDF objects out of 1000 (max. 8388607)
+ 206 compressed objects within 3 object streams
  128 named destinations out of 1000 (max. 500000)
- 35 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

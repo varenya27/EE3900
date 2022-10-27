@@ -1,0 +1,15 @@
+Circuit at P
+
+V1 1 0 dc 1V
+R1 out 1 1
+C1 out 0 1u ic=0
+R2 out 2 2
+V2 2 0 dc 2V
+
+.control 
+tran 0.1u 10u uic
+plot out 0 1 2
+hardcopy 2_8.ps out 0 1 2
+.endc
+
+.end

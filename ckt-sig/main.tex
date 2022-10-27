@@ -641,7 +641,19 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/ckt-sig/codes/2_7
 	    \caption{Capacitor voltage }
 	    \label{fig:vct}
 	\end{figure}
-	\item Verify your result using ngspice.
+	\item Verify your result using ngspice.\\\\
+	\solution The following code simulates the circuit and plots Fig. \ref{fig:circuit_p}:
+\begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/ckt-sig/codes/2_8.cir
+\end{lstlisting}
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=\columnwidth]{figs/2_8.png}
+	    \caption{Capacitor voltage in ngspice}
+	    \label{fig:circuit_p}
+	\end{figure}
+
+		
 	\item Obtain Fig. 
 			\ref{fig:lap-ckt}
 			using the equivalent differential equation.\\
@@ -734,7 +746,7 @@ Use latex-tikz.\\\solution The resistive circuit figure is drawn below
 \item $v_{C_0}(t)$ = ? Plot using python.
 \begin{align}
          V_{C_0}(s) &= \frac{ \frac{2}{sR_2}+\frac{4C_0}{3}}{sC_0+\frac{1}{R_1}+\frac{1}{R_2}}\\
-         &= \frac{2}{R_2C_0}\brak{\frac{1}{s}\times\frac{1}{s+\frac{1}{C_0}\brak{\frac{1}{R_1}+\frac{1}{R_2}}}}+\frac{4/3}{s+\frac{1}{C_0}\brak{\frac{1}{R_1}+\frac{1}{R_2}}}\\
+         &= \frac{2}{R_2C_0}\brak{\frac{1}{s}\times\frac{1}{s+\frac{1}{C_0}\brak{\frac{1}{R_1}\frac{1}{R_2}}}}+\nonumber\\&+\frac{4/3}{s+\frac{1}{C_0}\brak{\frac{1}{R_1}+\frac{1}{R_2}}}\\
          &= \frac{2}{R_2\brak{\frac{1}{R_1}+\frac{1}{R_2}}}\brak{\frac{1}{s}-\frac{1}{s+\frac{1}{C_0}\brak{\frac{1}{R_1}+\frac{1}{R_2}}}}\nonumber\\&+\frac{4/3}{s+\frac{1}{C_0}\brak{\frac{1}{R_1}+\frac{1}{R_2}}}
 \end{align}
 Applying the inverse Laplace on both sides:
@@ -759,6 +771,19 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/ckt-sig/codes/3_4
 	\end{figure}
 
 \item Verify your result using ngspice.
+\\\\
+	\solution The following code simulates the circuit and plots Fig. \ref{fig:circuit_q}:
+\begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/ckt-sig/codes/3_5.cir
+\end{lstlisting}
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=\columnwidth]{figs/3_5.png}
+	    \caption{Capacitor voltage in ngspice}
+	    \label{fig:circuit_q}
+	\end{figure}
+
+
 \item Find $v_{C_0}(0-), v_{C_0}(0+)$ and  $v_{C_0}(\infty) $. \\
 \solution at $t=0^-$, S is connected to P
 \begin{align}

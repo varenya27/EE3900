@@ -818,13 +818,22 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/ckt-sig/codes/3_5
 					\frac{q}{C} + 2\frac{2+i_2}{3} &= 2\\
 					\frac{q}{C} +\frac{2}{3}\frac{dq}{dt} &= \frac{2}{3}\\
 					\dot{q} + \frac{3q}{2C}=1
-				 %   2C \frac{dq}{dt} &= 2C-3q\\
-				 %   \frac{dq}{2C-3q} &= \frac{dt}{2C}\\
-				 %   ln\brak{\frac{2C-3q}{2C}} &= -\frac{3t}{2C}\\
-				 %   \implies q &= \frac{2}{3}(1-e^{-1.5t\times10^6})\mu C
+				 2C \frac{dq}{dt} &= 2C-3q\\
+				    \frac{dq}{2C-3q} &= \frac{dt}{2C}\\
+				    ln\brak{\frac{2C-3q}{2C}} &= -\frac{3t}{2C}\\
+				    \implies q &= \frac{2}{3}(1-e^{-1.5t\times10^6})\mu C
 				\end{align}
 				
 	\item  Find $H(s)$ considering the ouput voltage at the capacitor.\\\solution
+	The input and output voltages can be expressed as functions of time as follows:
+			\begin{align}
+				V_{in}(t) &= 2u(t)\\
+				V_{out}(t) &= \frac{2}{3}\brak{1-e^{-1.5t\times10^6}}u(t)\\
+				\mathcal{L}\{V_{in}(t)\} &= \frac{2}{s}\\
+				\mathcal{L}\{V_{out}\} &= \frac{2}{3}\brak{\frac{1}{s} - \frac{1}{s+1.5e6}}\\
+				H(s) &= \frac{2}{3}\brak{\frac{1}{s}-\frac{1}{s+1.5e6}}/\frac{2}{s}\\
+				&= \frac{1e6}{2\brak{s+1.5e6}}
+			\end{align}
 	\item Plot $H(s)$.  What kind of filter is it?
 	\item Using trapezoidal rule for integration, formulate the difference equation
 		by considering 

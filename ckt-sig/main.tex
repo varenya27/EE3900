@@ -806,32 +806,84 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/ckt-sig/codes/3_5
 	\item In Fig. 
 				\ref{fig:ckt},
 				consider the case when $S$ is switched to $Q$ right in the beginning. Formulate the differential equation.\\
-				\solution \\\\
-	
-				Let $i_1$ and $i_2$ be the currents i through $R_1$ and the capacitor resp. Current through $R_2$ will thus be $i_1+i_2$.
-				\begin{align}
-					i_1+2(i_1+i_2) = 2\\
-					\implies i_1 = \frac{2}{3}\brak{1-i_2}\\
-				\end{align}
-				Applying KVL in the loop with $R_2$ and the capacitor
-				\begin{align}
-					\frac{q}{C} + 2\frac{2+i_2}{3} &= 2\\
-					\frac{q}{C} +\frac{2}{3}\frac{dq}{dt} &= \frac{2}{3}\\
-					\dot{q} + \frac{3q}{2C}=1
-				 %   2C \frac{dq}{dt} &= 2C-3q\\
-				 %   \frac{dq}{2C-3q} &= \frac{dt}{2C}\\
-				 %   ln\brak{\frac{2C-3q}{2C}} &= -\frac{3t}{2C}\\
-				 %   \implies q &= \frac{2}{3}(1-e^{-1.5t\times10^6})\mu C
-				\end{align}
-				
+				\solution \\ Applying KCL at the Capacitor Junction:
+            \begin{align}
+                \frac{V_2-V_C}{R_2} &= \frac{dq}{dt}+\frac{V_C}{R_1}\\
+                V_2-V_C &= 2C\dot{V_C}+2V_C\\
+                \implies C\dot{V_C}+\frac{3}{2}V_C&= \frac{V_2}{2} \label{eq:vct-de}
+            \end{align}
 	\item  Find $H(s)$ considering the ouput voltage at the capacitor.\\\solution
-	\item Plot $H(s)$.  What kind of filter is it?
+	The input and output voltages can be expressed as functions of time as follows:
+			\begin{align}
+				V_{in}(t) &= 2u(t)\\
+				V_{out}(t) &= \frac{2}{3}\brak{1-e^{-1.5t\times10^6}}u(t)\\
+				\mathcal{L}\{V_{in}(t)\} &= \frac{2}{s}\\
+				\mathcal{L}\{V_{out}\} &= \frac{2}{3}\brak{\frac{1}{s} - \frac{1}{s+1.5e6}}\\
+				H(s) &= \frac{2}{3}\brak{\frac{1}{s}-\frac{1}{s+1.5e6}}/\frac{2}{s}\\
+				&= \frac{1e6}{2\brak{s+1.5e6}} \label{eq:hs}
+			\end{align}
+	\item Plot $H(s)$.  What kind of filter is it?\\
+		\solution The following code simulates the circuit and plots Fig. \ref{fig:transfer}:
+\begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/ckt-sig/codes/4_3.py
+\end{lstlisting}
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=\columnwidth]{figs/transfer.png}
+	    \caption{Transfer function}
+	    \label{fig:transfer}
+	\end{figure}
+$H(s)$ looks like a low-pass filter
 	\item Using trapezoidal rule for integration, formulate the difference equation
 		by considering 
 	\begin{align}
 		y(n) = y(t)\vert_{t=n}
+	\end{align}\\\solution
+	Using \eqref{eq:vct-de} and applying the trapezoidal rule:
+	\begin{align}
+	\int_a^bf(x)dx &= \frac{1}{2}\brak{b-a}\brak{f(b)+f(a)}\\
+	C\dot{V_c}+\frac{3V_c}{2} &= \frac{V_2}{2}
+	\end{align}
+	Applying the limits from n to n+1
+	\begin{align}
+	    	C\int_{v_c(n1)}^{v_c(n+1)} dV_c + \int_{n}^{n+1}\frac{3V_c}{2}dt&= \int_{n}^{n+1}u(t) dt\\
+	    	\implies C\brak{v_c(n+1)-v_c(n)}&+\nonumber\\
+	    	\frac{3}{4}\brak{v_c(n+1)+v_c(n)} =\frac{u(n+1)+u(n)}{2}&\\
+	    	v_c(n+1)\brak{C+0.75}=v_c(n)\brak{C-0.75}&+\nonumber\\
+	    	\frac{u(n+1)+u(n)}{2}&
 	\end{align}
 	\item Find $H(z)$.
+	\begin{align}
+	    H(z) &= \frac{V_c(z)}{V_2(z)}\label{eq:hz-def}
+	\end{align}
+	where
+	\begin{align}
+	    v_2(n) &= 2u(n)\\
+	    \implies V_2(z) &= \frac{2}{1-z^{-1}}
+	\end{align}
+	ROC: $|z|>1$
+	and
+	\begin{align}
+	    &v_c(n+1)\brak{C+\frac{3}{4}}-v_c(n)\brak{C-\frac{3}{4}}= \frac{u(n+1)+u(n)}{2}\\
+	    &zV_c(z)\brak{C+\frac{3}{4}}-V_c(z)\brak{C-\frac{3}{4}}= \frac{z+1}{2\brak{1-z^{-1}}}\\
+	    &\implies V_c(z) = \frac{2(1+z)}{(1-z^{-1})((4C+3)z-4C+3)}
+	\end{align}
+	Plugging in the two results in \eqref{eq:hz-def}:
+\begin{align}
+    H(z) =\frac{z+1}{(4C+3)z-4C+3} \label{eq:hz}
+\end{align}
+with $C=10^{-6}$ and ROC $|z|>1$
 	\item How can you obtain $H(z)$ from $H(s)$?
+	\\\solution $H(z)$ can be obtained using the Bilinear Transform.
+	\begin{align}
+	    s \longrightarrow \frac{2}{T}\frac{z-1}{z+1}
+	\end{align}
+	where T is the integration step size, ($T=1$). $H(s)$ can be written in with $C=10^{-6}$ from \eqref{eq:hs} as:
+	\begin{align}
+	    H(z) &= \frac{0.5}{2C\frac{z-1}{z+1}+1.5}\\
+	    &= \frac{z+1}{4C(z-1)+3(z+1)}\\
+	    &= \frac{z+1}{(4C+3)z-4C+3}\label{eq:hz-from-hs}
+	\end{align}
+	Clearly, \eqref{eq:hz} and \eqref{eq:hz-from-hs} are the same.
 	\end{enumerate}
 \end{document}

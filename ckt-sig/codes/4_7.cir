@@ -1,0 +1,14 @@
+Circuit at S
+
+R1 out 0 1
+C1 out 0 1u ic=0
+R2 out 2 2
+V2 2 0 dc 2V
+
+.control 
+tran 0.1u 10u uic
+run
+wrdata out.txt v(out)
+.endc
+
+.end

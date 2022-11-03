@@ -885,5 +885,17 @@ with $C=10^{-6}$ and ROC $|z|>1$
 	    &= \frac{z+1}{(4C+3)z-4C+3}\label{eq:hz-from-hs}
 	\end{align}
 	Clearly, \eqref{eq:hz} and \eqref{eq:hz-from-hs} are the same.
-	\end{enumerate}
+\item Plot the three different output functions. \\\solution
+	The difference equation gives (for $n>0$)
+	\begin{align}
+	v(n+1) &= v(n)\frac{C-0.75}{C+0.75}+\frac{1}{C+0.75}
+		\end{align} 
+\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=\columnwidth]{figs/final.png}
+	    \caption{The three different output functions}
+	    \label{fig:final}
+	\end{figure}
+\end{enumerate}
+
 \end{document}

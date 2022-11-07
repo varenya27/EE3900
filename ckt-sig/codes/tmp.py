@@ -1,7 +1,8 @@
 import numpy as np
 from matplotlib import pyplot as plt
 import os
-from scipy import signal
+#from scipy import signal
+
 
 os.system('cat 4_7.cir | ngspice')
 k = 1.5e6
@@ -19,7 +20,7 @@ print(vn)
 print(np.pad(vn, (0,1), constant_values=(0,0)))
 print(np.pad(4, (1,0), constant_values=(0,0)))
 vn = np.pad(vn, (0,1), constant_values=(0,0)) + np.pad(vn, (1,0), constant_values=(0,0))
-print(vn)
+vn = 0.666*vn
 vn[0] = 0
 plt.plot(t, 2*(1 - np.exp(-k*t))/3)
 plt.plot(t, (V2*tau/(2*C0*R2))*vn[:len(t)], '.')

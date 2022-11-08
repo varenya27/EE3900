@@ -3,39 +3,34 @@ import matplotlib.pyplot as plt
 def u(n):
     if n<0: return 0
     return 1
-
-def v(n):
-    C=1e-6
-    a= (C-0.75e-7)/(C+0.75e-7)
-    b= 1/(C+0.75)
-
-    return -(1-a**(n-1))/(1-a)
-
+T=1e7
+c=1e-6
+def v(n,vi):
+    a = (4*c*T-3)/(4*c*T+3)
+    b=4/(4*c*T+3)
+    if len(vi)==0: vi.append(0)
+    else:
+        vi.append(a*vi[-1]+b)
+    
+t,v_sim = np.loadtxt('ckt-sig/codes/out.txt', unpack=True)
+n = np.arange(1,111)/1e7
 
 vi=[]
+for i in n:
+    v(i,vi)
 
-
-t,v_sim = np.loadtxt('out.txt', unpack=True)
-#for i in t:
- #   print(v(i))
- #   vi.append(v(i))
 plt.figure()
-plt.plot(t,v_sim,'.', label='ngspice simulation')
-#plt.plot(t,vi,'ro', label='difference equation')
-plt.plot(t,0.66*(1-np.exp(-1.5e6*t)), label='theory')
-#plt.label(['ngspice simulations','theory'])
+# plt.plot(n,2/3*(1-(1-7.5e5**(n*1e7))/(1+7.5e5**(n*1e7))),'.', label='pls work')
+# t = np.linspace(0, 1e-5, 111)
 
-T = 1e-7
-tau = 2e-6/3
-p = (2*tau-T)/(2*tau+T)
-t = np.linspace(0, 1e-5, 111)
-n = np.arange(0, 111, 1)
-vn = 1 - p**n
-print(vn)
-print(np.pad(vn, (0,1), constant_values=(0,0)))
-print(np.pad(4, (1,0), constant_values=(0,0)))
-vn = np.pad(vn, (0,1), constant_values=(0,0)) + np.pad(vn, (1,0), constant_values=(0,0))
-vn =0.5* 0.666*vn
-plt.plot(t,vn[0:111],'.', label='difference equation')
+plt.plot(n,np.array(vi),'.', label='difference equation from for loop') #spice
+plt.plot(n,2/3 * (1 - ((4*c*T - 3)/(4*c*T + 3))**(n*1e7)),'.', label='inv z transform') #spice
+
+plt.plot(t,v_sim,'.', label='ngspice simulation') #spice
+plt.plot(t,0.66*(1-np.exp(-1.5e6*t)), label='theory') #analytic
+
+#minor
+plt.grid()
 plt.legend()
-plt.savefig('tmp.png')
+plt.savefig('ckt-sig/figs/vns.png')
+plt.show()

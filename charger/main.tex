@@ -7,7 +7,7 @@
 %\usepackage{subcaption}
 %\doublespacing
 \singlespacing
-
+\usepackage{circuitikz}
 %\usepackage{graphicx}
 %\usepackage{amssymb}
 %\usepackage{relsize}
@@ -503,7 +503,7 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/charger/codes/3_1
 Since the output is 5V
 \begin{align}
     \frac{24}{\pi}H(f) &= 5\rect{\frac{f}{2f_0}}\\
-    &= \frac{5\pi}{24}\rect{\frac{f}{2f_0}}
+    \implies H(f)&= \frac{5\pi}{24}\rect{\frac{f}{2f_0}}
 \end{align}
 \item Find $h(t)$.
 Applying the inverse fourier transform:
@@ -528,10 +528,137 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/charger/codes/4_3
 \section{Filter Design}
 \begin{enumerate}[label=\thesection.\arabic*
 ,ref=\thesection.\theenumi]
-\item Design a Butterworth filter for $H(f)$.
-\item Design a Chebyschev filter for $H(f)$.
+\item Design a Butterworth filter for $H(f)$.\\
+\solution For a Butterworth filter of order n and cutoff freq $f_c$:
+\begin{align}
+    |H_n(f)|^2&= \frac{1}{\sqrt{1+\brak{\frac{f}{f_c}}}^{2n}}\\
+    A&= -10\log_{10}|H(f)|^2
+\end{align}
+Let the passband and stopband fruquency cutoffs be 50Hz and 100 Hz respectively with the corresponding attenuations as -1db and -20dB.
+\begin{align}
+    A_p&= -10log_{10}\brak{1+\brak{\frac{f_p}{f_c}}^{2n}}\\    
+    A_s&= -10log_{10}\brak{1+\brak{\frac{f_s}{f_c}}^{2n}}\\
+    \implies \brak{\frac{f_p}{f_s}}^{2n}&= \frac{10^{-\frac{-A_p}{10}}-1} {10^{-\frac{-A_s}{10}}-1}\\
+    (0.5)^{2n}&= \frac{10^{0.1}-1}{10^{2}-1}\\
+    4^{-n}&= \frac{0.2589}{99}\\
+    n&= 4.289
+\end{align}
+Taking $n=5$ and solving for $f_c$
+\begin{align}
+    f_{c_1}&= f_p\brak{10^{-\frac{A_p}{10}}-1}^{-\frac{1}{2n}}= 57.23Hz\\
+    f_{c_2}&= f_s\brak{10^{-\frac{A_s}{10}}-1}^{-\frac{1}{2n}}= 63.16Hz\\
+    \implies f_c &\approx60Hz
+\end{align}
+\item Design a Chebyschev filter for $H(f)$.\\\solution
+For a Chebyshev filter of order $n$, ripple $\epsilon$, cutoff freq $f_c$:
+\begin{align}
+    |H_n(f)|^2&= \frac{1}{\sqrt{1+\epsilon^2c_n^2\brak{\frac{f}{f_c}}}}
+\end{align}
+where $C_n=cosh^{-1}(ncoshx)$
+The chebyshev polynomial is given as:
+\begin{align}
+    c_n(x)=\begin{cases}
+        \cos(n\cos^{-1} x) \;\; |x|\leq1\\
+\cosh(n\cosh^{-1} x) \;\; \text{otherwise}
+    \end{cases}
+\end{align}
+For a passband frequency cuttoff $f_p=f_c$, stopband freq $f_s$, attenuation $A_s$ and p-p ripple $\delta$:
+\begin{align}
+    \delta&=10\log_{10}\brak{1+\epsilon^2}\\
+    \implies \epsilon&= \sqrt{10^{\frac{\delta}{10}}-1}
+\end{align}
+For $f_s>f_p$:
+\begin{align}
+    A_s&=-10\log_{10}\brak{1+\epsilon^2c_n^2\brak{\frac{f_s}{f_p}}}\\
+    \implies c_n\brak{\frac{f_s}{f_p}}&= \frac{\sqrt{10^{-\frac{A_s}{10}}-1}}{\epsilon}\\
+    \implies n&=\frac{ \cosh^{-1}\brak{\frac{\sqrt{10^{-\frac{A_s}{10}}-1}}{\epsilon}} }{ \cosh^{-1}\brak{\frac{f_s}{f_p}} }
+\end{align}
+Thus with $f_p=60Hz, f_s=100Hz, \delta=0.5dB, A_s=-20dB$, we can calculate $n$ and $\epsilon$ as follows:
+\begin{align}
+    \epsilon&= \sqrt{10^{\frac{0.5}{10}}-1}= 0.35\\
+    n&=\frac{ \cosh^{-1}\brak{\frac{\sqrt{10^{-\frac{100}{10}}-1}}{0.35}} }{ \cosh^{-1}\brak{\frac{100}{60}} }=3.68\approx 4
+\end{align}
 \item Design a circuit for your Butterworth filter.
-\item Design a circuit for your Chebyschev filter.
+\solution For a butterworth filter of order n, $C_k,L_k$ value for $\omega=1$
+\begin{align}
+C_1=C_5&=0.618F\\
+C_3&=2F\\
+L_2=L_4&=1.618H\\
+    C_k' &= \frac{C_k}{\omega_c} \\L_k' &= \frac{L_k}{\omega_c}
+\end{align}
+Taking $f_c = 60$ Hz ,
+\begin{align}
+    f_c=60\implies\omega_c&= 120\pi\\
+    C_1' = C_5' &= \SI{1.64}mF \\
+    L_2' = L_4' &= \SI{4.29}mH \\
+    C_3' &= \SI{5.31}mF \\
+\end{align}
+The L-C network is shown in Fig. \ref{fig:butter-filter}.
+\begin{figure}[!ht]
+    \centering
+    \begin{circuitikz} 
+        \draw (0,0) to[short, o-o] (7,0);
+        \draw (0,2) to [short, o-] (1,2) to [L, l=4.29 mH] (3.5,2) to [L, l=4.29 mH] (6,2) to[short, -o] (7,2);
+        \draw (1,0) to[C, l=1.64 mF] (1,2);
+        \draw (3.5,0) to[C, l=5.31 mF] (3.5,2);
+        \draw (6,0) to[C, l=1.64 mF] (6,2);
+    \end{circuitikz}
+    \caption{L-C Butterworth Filter}
+    \label{fig:butter-filter}
+\end{figure}
+  The following code plots Fig. \ref{fig:butt}
+	\begin{lstlisting}
+	wget https://raw.githubusercontent.com/varenya27/EE3900/master/charger/codes/5_3.cir
+\end{lstlisting}
+\begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/charger/codes/5_3.py
+\end{lstlisting}
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=\columnwidth]{figures/butt.png}
+	    \caption{Butterworth filter sim }
+	    \label{fig:butt}
+	\end{figure}
+\item Design a circuit for your Chebyshev filter.
+\solution For order 3 and 0.5 dB ripple, following a similar procedure as in the Butterworth filter
+% \begin{align}
+%     C_1 = C_3 &= 1.596\\
+%     L_2 &= 1.096
+% \end{align} 
+
+taking $f_c =50Hz$,
+\begin{align}
+    C_1' = \SI{4.43}mF \\
+    L_2' = \SI{3.16}mH \\
+    C_3' = \SI{6.28}mF \\
+    L_4' = \SI{2.23}mH
+\end{align}
+The L-C network is shown in Fig. \ref{fig:cheby-filter}.
+\begin{figure}[!ht]
+    \centering
+    \begin{circuitikz} 
+        \draw (0,0) to[short, o-o] (7,0); 
+        \draw (1,0) to[C, l=4.43 mF] (1,2);
+        \draw (3.5,0) to[C, l=6.28 mF] (3.5,2);
+        \draw (0,2) to [short, o-] (1,2) to [L, l=3.16 mH] (3.5,2) to[L, l=2.23 mH] (6,2) to[short, -o] (7,2);
+    \end{circuitikz}
+    \caption{L-C Chebyshev Filter}
+    \label{fig:cheby-filter}
+\end{figure}
+  The following code plots Fig. \ref{fig:cheb}
+	\begin{lstlisting}
+	wget https://raw.githubusercontent.com/varenya27/EE3900/master/charger/codes/5_4.cir
+\end{lstlisting}
+\begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/charger/codes/5_4.py
+\end{lstlisting}
+	\begin{figure}[h!]
+	    \centering
+	    \includegraphics[width=\columnwidth]{figures/cheb.png}
+	    \caption{Chebyshev filter sim }
+	    \label{fig:cheb}
+	\end{figure}
+
 \end{enumerate}
 
 

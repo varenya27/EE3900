@@ -1,0 +1,17 @@
+Butt filter for phone
+
+V1 in 0 dc 0 SIN (0 12v 50 0 0) 
+R0 in 1 1
+C1 1 0 1.64m ic=0
+L2 1 2 4.29m
+C3 2 0 5.31m ic=0
+L4 2 3 4.29m
+C5 3 0 1.64m ic=0
+RL 3 0 1
+
+.control
+ac dec 10 1 1000
+wrdata butt_final.txt v(3)
+.endc
+
+.end

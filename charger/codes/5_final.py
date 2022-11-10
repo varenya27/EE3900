@@ -30,7 +30,7 @@ t=1/f
 
 
 ts = 1e-4
-t_fft = np.arange(-2/f0, 2/f0, ts)
+t_fft = np.arange(0, 50/f0, ts)
 x = A*np.abs(np.sin(2*np.pi*f0*t_fft))
 X = fft(x)
 f = fftfreq(x.size, d=ts)
@@ -38,21 +38,31 @@ f = fftfreq(x.size, d=ts)
 H= 1/np.sqrt(1+(f/fc)**(2*n))
 print(H)
 Y=np.abs(H*X)
-# plt.plot(sampl_freq,np.abs(sig_fft),label='X(f)',color='blue')
-# plt.plot(f,(Y),label='Y(f)',color='orange')
-# plt.plot(f,np.abs(H),label='H(f)',color='red')
+x1 = ifft(X)
+h1 = ifft(H)
+y1 = np.convolve(x1,h1)
+plt.plot(f,np.abs(X),label='X(f)',)
+plt.plot(f,(Y),label='Y(f)',)
+plt.plot(f,np.abs(H),label='H(f)',)
 y=(ifft(Y))
-t = fftfreq(y.size, d=1/ts)
+# t = fftfreq(y.size, d=1/ts)
 t=1/f
-print('t=',t)
-# t=np.linspace(-1,1,len(y))
-# y=(fft(Y))
-# plt.plot(f, Y)
-# plt.plot(sampl_freq_y,5*(y),label='y(t)')
-# plt.plot(t,ifft(x_ft))
-plt.plot(np.abs(t), (y), label='y(t)')
+
+
+# plt.plot(abs(t)[0:100], abs((y1)[len(t)-1:][0:100]-2.5), label='analysis')
+# t_spice,v_spice= np.loadtxt('butt_final.txt',unpack=True)
+# plt.scatter(t_spice,0.48*v_spice,5,color='orange',label='sim')
+
+
 plt.grid()
 plt.legend()
-plt.xlabel('t')
-plt.ylabel('y(t)',)
+# plt.xlabel('t')
+# plt.ylabel('y(t)',)
+
+plt.xlabel('f')
+# plt.ylabel('y(t)',)
+
+# plt.savefig('../figures/butt_filt_phone.png')
+plt.savefig('../figures/butt_filt_phone_transfer.png')
+plt.title('The input, output and transfer functions in the freq domain')
 plt.show()

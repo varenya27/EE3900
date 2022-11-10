@@ -1,17 +1,24 @@
-Butt filter for phone
+*. model DIODE1 D ( bv =50 is =1 e -13 n =1.05)
+V1 c a SINE(0 12 50 0 0 0 10000)
+d1 a b	diode
+d2 c b	diode
+d3 0 c	diode
+d4 0 a	diode
+R0 b 1 1
+C1 1 0 4.43m ic=0
+L2 1 2 3.16m
+C3 2 0 6.28m ic=0
+L4 2 3 2.23m
+RL 3 0 1.9841
 
-V1 in 0 dc 0 SIN (0 12v 50 0 0) 
-R0 in 1 1
-C1 1 0 1.64m ic=0
-L2 1 2 4.29m
-C3 2 0 5.31m ic=0
-L4 2 3 4.29m
-C5 3 0 1.64m ic=0
-RL 3 0 1
 
+.MODEL  diode d
 .control
-ac dec 10 1 1000
+run
+tran 1 1.0005 uic
+
 wrdata butt_final.txt v(3)
+
 .endc
 
 .end

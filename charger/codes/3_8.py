@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.fft import fft,fftfreq
+from scipy.fft import fft,fftfreq,ifft
 from scipy.signal import unit_impulse
 from matplotlib import pyplot as plt
 
@@ -39,9 +39,9 @@ markers.set_markersize(5)
 base.set_color('black')
 # plt.plot(sampl_freq, np.abs(sig_fft),'C1',5,label='sim',)
 plt.scatter(f,x_ft,20,color='orange',label='analysis')
-
+plt.plot(t_fft[:50],ifft(x_ft))
 plt.legend()
 plt.xlim(-5*f0, 5*f0)
 plt.grid()
-# plt.show()
-plt.savefig('charger/figures/xt-ft.png')
+plt.show()
+# plt.savefig('charger/figures/xt-ft.png')

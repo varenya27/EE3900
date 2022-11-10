@@ -659,7 +659,31 @@ wget https://raw.githubusercontent.com/varenya27/EE3900/master/charger/codes/5_4
 	    \label{fig:cheb}
 	\end{figure}
 
+
+\item Design a digital Butterworth filter \\
+\solution   The following code plots Fig. \ref{fig:final1} and Fig. \ref{fig:final2}
+\begin{lstlisting}
+wget https://raw.githubusercontent.com/varenya27/EE3900/master/charger/codes/5_final.py
+\end{lstlisting}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/butt_filt_phone_transfer.png}
+    \caption{Transfer function with i/o functions}
+    \label{fig:final1}
+\end{figure}
+
+Fig \ref{fig:final2} shows the plot with the transfer functions $H(f)$ along with $X(f)$ and $Y(f)$.
+$y(t)$ is calculated as:
+\begin{align}
+    Y(f)&=H(f)\times X(f)\\
+    y(t)&\system{F}Y(f)
+\end{align}
+Doing the computation gives $y(t)$ as seen in Fig. \ref{fig:final2}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\columnwidth]{figures/butt_filt_phone.png}
+    \caption{DC 5V output}
+    \label{fig:final2}
+\end{figure}
 \end{enumerate}
-
-
 \end{document}
